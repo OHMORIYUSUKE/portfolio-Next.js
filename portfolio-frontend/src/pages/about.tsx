@@ -4,11 +4,11 @@ import styles from '../../styles/Home.module.css';
 
 import Layout from '../layout/layout';
 
-const Home: React.FC = () => {
+const about: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>portfolio</title>
+        <title>about</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -64,4 +64,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default about;
