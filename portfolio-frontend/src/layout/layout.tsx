@@ -88,10 +88,10 @@ export default function ResponsiveDrawer(props: Props) {
   const drawer = (
     <div>
       <div className={classes.toolbar}>
-        <Typography align='center' variant='h4' color='textSecondary'>
+        <Typography align="center" variant="h4" color="textSecondary">
           Portfolio
         </Typography>
-        <Typography align='center' variant='subtitle2' color='textSecondary'>
+        <Typography align="center" variant="subtitle2" color="textSecondary">
           v2.0.0
         </Typography>
       </div>
@@ -146,7 +146,10 @@ export default function ResponsiveDrawer(props: Props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar} style={{background: '#1976D2'}}>
+      <AppBar
+        position="fixed"
+        className={classes.appBar}
+        style={{ background: '#1976D2' }}>
         <Toolbar>
           <IconButton
             color="inherit"
