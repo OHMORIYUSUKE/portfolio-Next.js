@@ -9,5 +9,5 @@ pythonanywhere,vercel を用いてデプロイする。
 
 ---
 
-現在のサイト(HTML,CSS) : http://utan.php.xdomain.jp/
+現在のサイト(HTML,CSS) : http://utan.php.xdomain.jp/  
 現在のブログサイト(PHP(フレームワークなし)) : http://utan.php.xdomain.jp/blog/
