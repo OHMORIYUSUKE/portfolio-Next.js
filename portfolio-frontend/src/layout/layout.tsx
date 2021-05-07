@@ -5,12 +5,10 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -25,9 +23,14 @@ import FaceIcon from '@material-ui/icons/Face';
 import CreateIcon from '@material-ui/icons/Create';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import EmailIcon from '@material-ui/icons/Email';
+import Collapse from '@material-ui/core/Collapse';
+import Link from '@material-ui/core/Link';
+import Container from '@material-ui/core/Container';
 
 const drawerWidth = 240;
 
@@ -68,6 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   children?: React.ReactNode;
+  pageName: string;
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -85,6 +89,12 @@ export default function ResponsiveDrawer(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   const drawer = (
     <div>
       <div className={classes.toolbar}>
@@ -97,45 +107,93 @@ export default function ResponsiveDrawer(props: Props) {
       </div>
       <Divider />
       <List>
-        <ListItem button>
-          <ListItemIcon>
-            <FaceIcon />
-          </ListItemIcon>
-          <ListItemText primary={'About'} />
-        </ListItem>
-        <ListItem button>
+        <Link href={'/about'} underline="none" color="textPrimary">
+          <ListItem button>
+            <ListItemIcon>
+              <FaceIcon />
+            </ListItemIcon>
+            <ListItemText primary={'About'} />
+          </ListItem>
+        </Link>
+        <ListItem button onClick={handleExpandClick}>
           <ListItemIcon>
             <LaptopMacIcon />
           </ListItemIcon>
           <ListItemText primary={'Works'} />
         </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <CreateIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Blog'} />
-        </ListItem>
+        {/* ---プルダウン--- */}
+        <Collapse in={expanded}>
+          <Link
+            href={'/works/#programming'}
+            underline="none"
+            color="textPrimary">
+            <ListItem button>
+              <ListItemIcon>
+                <ChevronRightIcon />
+              </ListItemIcon>
+              <ListItemText primary={'プログラミング'} />
+            </ListItem>
+          </Link>
+          <Link href={'/works/#other'} underline="none" color="textPrimary">
+            <ListItem button>
+              <ListItemIcon>
+                <ChevronRightIcon />
+              </ListItemIcon>
+              <ListItemText primary={'その他'} />
+            </ListItem>
+          </Link>
+        </Collapse>
+        {/* ------ */}
+        <Link href={'/blog'} underline="none" color="textPrimary">
+          <ListItem button>
+            <ListItemIcon>
+              <CreateIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Blog'} />
+          </ListItem>
+        </Link>
       </List>
       <Divider />
       <List>
-        <ListItem button>
-          <ListItemIcon>
-            <TwitterIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Twitter'} />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <GitHubIcon />
-          </ListItemIcon>
-          <ListItemText primary={'GitHub'} />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <EmailIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Email'} />
-        </ListItem>
+        <Link
+          href={'https://twitter.com/uutan1108'}
+          underline="none"
+          color="textPrimary"
+          target="_blank"
+          rel="noopener noreferrer">
+          <ListItem button>
+            <ListItemIcon>
+              <TwitterIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Twitter'} />
+          </ListItem>
+        </Link>
+        <Link
+          href={'https://github.com/OHMORIYUSUKE'}
+          underline="none"
+          color="textPrimary"
+          target="_blank"
+          rel="noopener noreferrer">
+          <ListItem button>
+            <ListItemIcon>
+              <GitHubIcon />
+            </ListItemIcon>
+            <ListItemText primary={'GitHub'} />
+          </ListItem>
+        </Link>
+        <Link
+          href={'mailto:b2190350@photon.chitose.ac.jp'}
+          underline="none"
+          color="textPrimary"
+          target="_blank"
+          rel="noopener noreferrer">
+          <ListItem button>
+            <ListItemIcon>
+              <EmailIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Email'} />
+          </ListItem>
+        </Link>
       </List>
     </div>
   );
@@ -144,6 +202,7 @@ export default function ResponsiveDrawer(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
+    <>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -159,8 +218,8 @@ export default function ResponsiveDrawer(props: Props) {
             className={classes.menuButton}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
+          <Typography variant="h5" noWrap>
+            {props.pageName}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -198,5 +257,21 @@ export default function ResponsiveDrawer(props: Props) {
         <Typography paragraph>{props.children}</Typography>
       </main>
     </div>
+    <footer style={{ marginBottom: '20px' }}>
+    <Container maxWidth="lg">
+      <Typography variant="h6" align="center" gutterBottom style={{fontSize: '18px'}}>
+      PortfolioSite
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        align="center"
+        color="textSecondary"
+        component="p"
+        style={{fontSize: '13px'}}>
+        Copyright © 2021 OHMORIYUSUKE All Rights Reserved.
+      </Typography>
+    </Container>
+  </footer>
+  </>
   );
 }

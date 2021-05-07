@@ -6,7 +6,7 @@ import Layout from '../layout/layout';
 
 const about: React.FC = () => {
   return (
-    <Layout>
+    <Layout pageName="About">
       <Head>
         <title>about</title>
         <link rel="icon" href="/favicon.ico" />
