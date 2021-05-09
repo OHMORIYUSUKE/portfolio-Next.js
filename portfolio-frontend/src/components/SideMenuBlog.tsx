@@ -9,22 +9,21 @@ import CreateIcon from '@material-ui/icons/Create';
 import { blogTag } from '../testData/blogTag';
 
 export function SideMenuBlog(): JSX.Element {
-    let open = localStorage.getItem('SideMenuBlog');
-    let opened = true;
-    if (open == 'true'){
-      opened = true;
-    }else{
-       opened = false;
-    }
-    const [expanded, setExpanded] = React.useState(opened);
-    console.log(open);
-  
-  
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
-      const openOrClose = !expanded;
-      localStorage.setItem('SideMenuBlog', openOrClose.toString());
-    };
+  let open = localStorage.getItem('SideMenuBlog');
+  let opened = true;
+  if (open == 'true') {
+    opened = true;
+  } else {
+    opened = false;
+  }
+  const [expanded, setExpanded] = React.useState(opened);
+  console.log(open);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+    const openOrClose = !expanded;
+    localStorage.setItem('SideMenuBlog', openOrClose.toString());
+  };
   return (
     <>
       <ListItem button onClick={handleExpandClick}>

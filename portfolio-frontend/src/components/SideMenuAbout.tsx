@@ -10,14 +10,13 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 export function SideMenuAbout(): JSX.Element {
   let open = localStorage.getItem('SideMenuAbout');
   let opened = true;
-  if (open == 'true'){
+  if (open == 'true') {
     opened = true;
-  }else{
-     opened = false;
+  } else {
+    opened = false;
   }
   const [expanded, setExpanded] = React.useState(opened);
   console.log(open);
-
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
