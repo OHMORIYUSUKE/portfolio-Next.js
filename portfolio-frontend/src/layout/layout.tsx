@@ -19,18 +19,11 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 
-import FaceIcon from '@material-ui/icons/Face';
-import CreateIcon from '@material-ui/icons/Create';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
-import GitHubIcon from '@material-ui/icons/GitHub';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import EmailIcon from '@material-ui/icons/Email';
-import Collapse from '@material-ui/core/Collapse';
 import Link from '@material-ui/core/Link';
-import Container from '@material-ui/core/Container';
+
+import dynamic from 'next/dynamic';
+import Footer from '../components/Footer';
+import SideMenuLinks from '../components/SideMenuLinks';
 
 const drawerWidth = 240;
 
@@ -80,6 +73,15 @@ interface Props {
 }
 
 export default function ResponsiveDrawer(props: Props) {
+  const SideMenuWorks = dynamic(() =>
+    import('../components/SideMenuWorks').then((mod) => mod.SideMenuWorks)
+  );
+  const SideMenuAbout = dynamic(() =>
+    import('../components/SideMenuAbout').then((mod) => mod.SideMenuAbout)
+  );
+  const SideMenuBlog = dynamic(() =>
+    import('../components/SideMenuBlog').then((mod) => mod.SideMenuBlog)
+  );
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -87,12 +89,6 @@ export default function ResponsiveDrawer(props: Props) {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
   };
 
   const drawer = (
@@ -107,93 +103,15 @@ export default function ResponsiveDrawer(props: Props) {
       </div>
       <Divider />
       <List>
-        <Link href={'/about'} underline="none" color="textPrimary">
-          <ListItem button>
-            <ListItemIcon>
-              <FaceIcon />
-            </ListItemIcon>
-            <ListItemText primary={'About'} />
-          </ListItem>
-        </Link>
-        <ListItem button onClick={handleExpandClick}>
-          <ListItemIcon>
-            <LaptopMacIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Works'} />
-        </ListItem>
-        {/* ---プルダウン--- */}
-        <Collapse in={expanded}>
-          <Link
-            href={'/works/#programming'}
-            underline="none"
-            color="textPrimary">
-            <ListItem button>
-              <ListItemIcon>
-                <ChevronRightIcon />
-              </ListItemIcon>
-              <ListItemText primary={'プログラミング'} />
-            </ListItem>
-          </Link>
-          <Link href={'/works/#other'} underline="none" color="textPrimary">
-            <ListItem button>
-              <ListItemIcon>
-                <ChevronRightIcon />
-              </ListItemIcon>
-              <ListItemText primary={'その他'} />
-            </ListItem>
-          </Link>
-        </Collapse>
-        {/* ------ */}
-        <Link href={'/blog'} underline="none" color="textPrimary">
-          <ListItem button>
-            <ListItemIcon>
-              <CreateIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Blog'} />
-          </ListItem>
-        </Link>
+        <SideMenuAbout />
+
+        <SideMenuWorks />
+
+        <SideMenuBlog />
       </List>
       <Divider />
       <List>
-        <Link
-          href={'https://twitter.com/uutan1108'}
-          underline="none"
-          color="textPrimary"
-          target="_blank"
-          rel="noopener noreferrer">
-          <ListItem button>
-            <ListItemIcon>
-              <TwitterIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Twitter'} />
-          </ListItem>
-        </Link>
-        <Link
-          href={'https://github.com/OHMORIYUSUKE'}
-          underline="none"
-          color="textPrimary"
-          target="_blank"
-          rel="noopener noreferrer">
-          <ListItem button>
-            <ListItemIcon>
-              <GitHubIcon />
-            </ListItemIcon>
-            <ListItemText primary={'GitHub'} />
-          </ListItem>
-        </Link>
-        <Link
-          href={'mailto:b2190350@photon.chitose.ac.jp'}
-          underline="none"
-          color="textPrimary"
-          target="_blank"
-          rel="noopener noreferrer">
-          <ListItem button>
-            <ListItemIcon>
-              <EmailIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Email'} />
-          </ListItem>
-        </Link>
+        <SideMenuLinks />
       </List>
     </div>
   );
@@ -203,75 +121,61 @@ export default function ResponsiveDrawer(props: Props) {
 
   return (
     <>
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={classes.appBar}
-        style={{ background: '#1976D2' }}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h5" noWrap>
-            {props.pageName}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}>
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open>
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph>{props.children}</Typography>
-      </main>
-    </div>
-    <footer style={{ marginBottom: '20px' }}>
-    <Container maxWidth="lg">
-      <Typography variant="h6" align="center" gutterBottom style={{fontSize: '18px'}}>
-      PortfolioSite
-      </Typography>
-      <Typography
-        variant="subtitle1"
-        align="center"
-        color="textSecondary"
-        component="p"
-        style={{fontSize: '13px'}}>
-        Copyright © 2021 OHMORIYUSUKE All Rights Reserved.
-      </Typography>
-    </Container>
-  </footer>
-  </>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          className={classes.appBar}
+          style={{ background: '#1976D2' }}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}>
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h5" noWrap>
+              {props.pageName}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <nav className={classes.drawer} aria-label="mailbox folders">
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Hidden smUp implementation="css">
+            <Drawer
+              container={container}
+              variant="temporary"
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}>
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Drawer
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              variant="permanent"
+              open>
+              {drawer}
+            </Drawer>
+          </Hidden>
+        </nav>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Typography paragraph>{props.children}</Typography>
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }

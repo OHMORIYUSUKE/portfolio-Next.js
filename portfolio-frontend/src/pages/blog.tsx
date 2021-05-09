@@ -3,7 +3,12 @@ import Head from 'next/head';
 
 import Layout from '../layout/layout';
 
-import { Theme, createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
+import {
+  Theme,
+  createStyles,
+  makeStyles,
+  useTheme,
+} from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -42,7 +47,10 @@ const blog: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={classes.root}>
-        <GridList cellHeight={180} className={classes.gridList} cols={cardsPerRow}>
+        <GridList
+          cellHeight={180}
+          className={classes.gridList}
+          cols={cardsPerRow}>
           {blogData.map((tile) => (
             <GridListTile key={tile.img} cols={1}>
               <img src={tile.img} alt={tile.title} />
