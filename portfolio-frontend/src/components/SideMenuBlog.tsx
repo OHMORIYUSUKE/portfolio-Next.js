@@ -9,11 +9,22 @@ import CreateIcon from '@material-ui/icons/Create';
 import { blogTag } from '../testData/blogTag';
 
 export function SideMenuBlog(): JSX.Element {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+    let open = localStorage.getItem('SideMenuBlog');
+    let opened = true;
+    if (open == 'true'){
+      opened = true;
+    }else{
+       opened = false;
+    }
+    const [expanded, setExpanded] = React.useState(opened);
+    console.log(open);
+  
+  
+    const handleExpandClick = () => {
+      setExpanded(!expanded);
+      const openOrClose = !expanded;
+      localStorage.setItem('SideMenuBlog', openOrClose.toString());
+    };
   return (
     <>
       <ListItem button onClick={handleExpandClick}>
@@ -25,10 +36,7 @@ export function SideMenuBlog(): JSX.Element {
       {/* ---プルダウン--- */}
       <Collapse in={expanded}>
         {blogTag.map((data) => (
-          <Link
-            href={'/blog#' + data.tag}
-            underline="none"
-            color="textPrimary">
+          <Link href={'/blog#' + data.tag} underline="none" color="textPrimary">
             <ListItem button>
               <ListItemIcon>
                 <ChevronRightIcon />

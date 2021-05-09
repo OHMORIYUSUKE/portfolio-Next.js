@@ -8,10 +8,21 @@ import FaceIcon from '@material-ui/icons/Face';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 export function SideMenuAbout(): JSX.Element {
-  const [expanded, setExpanded] = React.useState(false);
+  let open = localStorage.getItem('SideMenuAbout');
+  let opened = true;
+  if (open == 'true'){
+    opened = true;
+  }else{
+     opened = false;
+  }
+  const [expanded, setExpanded] = React.useState(opened);
+  console.log(open);
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+    const openOrClose = !expanded;
+    localStorage.setItem('SideMenuAbout', openOrClose.toString());
   };
   return (
     <>

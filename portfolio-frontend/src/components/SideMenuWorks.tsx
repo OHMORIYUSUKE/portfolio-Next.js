@@ -8,11 +8,22 @@ import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 export function SideMenuWorks(): JSX.Element {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+    let open = localStorage.getItem('SideMenuWorks');
+    let opened = true;
+    if (open == 'true'){
+      opened = true;
+    }else{
+       opened = false;
+    }
+    const [expanded, setExpanded] = React.useState(opened);
+    console.log(open);
+  
+  
+    const handleExpandClick = () => {
+      setExpanded(!expanded);
+      const openOrClose = !expanded;
+      localStorage.setItem('SideMenuWorks', openOrClose.toString());
+    };
   return (
     <>
       <ListItem button onClick={handleExpandClick}>
