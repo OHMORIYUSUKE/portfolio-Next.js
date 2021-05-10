@@ -3,6 +3,7 @@ import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 
 import Layout from '../layout/layout';
+import Footer from '../components/Footer';
 
 const works: React.FC = () => {
   return (
@@ -52,6 +53,7 @@ const works: React.FC = () => {
       </main>
 
       <a id="other"></a>
+      <Footer/>
     </Layout>
   );
 };

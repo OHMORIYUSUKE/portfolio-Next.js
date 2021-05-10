@@ -17,12 +17,14 @@ import { blogData } from '../testData/blogData';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Footer from '../components/Footer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
       justifyContent: 'space-around',
+      marginBottom: '20px',
     },
     gridList: {
       width: '95%',
@@ -69,6 +71,7 @@ const blog: React.FC = () => {
           ))}
         </GridList>
       </div>
+      <Footer/>
     </Layout>
   );
 };

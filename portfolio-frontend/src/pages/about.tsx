@@ -1,55 +1,27 @@
 import React from 'react';
-import Head from 'next/head';
-import styles from '../../styles/Home.module.css';
+import Container from '@material-ui/core/Container';
 
 import Layout from '../layout/layout';
+import AboutEvents from '../components/AboutEvents';
+import AboutSkill from '../components/AboutSkill';
+import AboutName from '../components/AboutName';
+import AboutLinks from '../components/AboutLinks';
+import Footer from '../components/Footer';
 
 const about: React.FC = () => {
   return (
     <Layout pageName="About">
-      <Head>
-        <title>about</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.ts!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}>
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+      <Container style={{ width: '90%',marginBottom: '20px' }}>
+        <h2>名前</h2>
+        <AboutName />
+        <h2>スキル</h2>
+        <AboutSkill />
+        <h2>イベント</h2>
+        <AboutEvents />
+        <h2>リンク</h2>
+        <AboutLinks />
+      </Container>
+      <Footer/>
     </Layout>
   );
 };

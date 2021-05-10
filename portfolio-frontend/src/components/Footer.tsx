@@ -4,7 +4,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer style={{ marginBottom: '20px' }}>
+    <footer>
       <Divider />
       <Container maxWidth="lg">
         <Typography

@@ -175,7 +175,6 @@ export default function ResponsiveDrawer(props: Props) {
           <Typography paragraph>{props.children}</Typography>
         </main>
       </div>
-      <Footer />
     </>
   );
 }
