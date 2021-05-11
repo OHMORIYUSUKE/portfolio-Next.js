@@ -6,6 +6,7 @@ import {
   Theme,
 } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { skillData } from '../testData/skillData';
 
 const BorderLinearProgress = withStyles((theme: Theme) =>
   createStyles({
@@ -35,15 +36,12 @@ export default function AboutSkill() {
 
   return (
     <div className={classes.root}>
-      <BorderLinearProgress variant="determinate" value={20} />
-      <br />
-      <BorderLinearProgress variant="determinate" value={10} />
-      <br />
-      <BorderLinearProgress variant="determinate" value={50} />
-      <br />
-      <BorderLinearProgress variant="determinate" value={70} />
-      <br />
-      <BorderLinearProgress variant="determinate" value={40} />
+      {skillData.map((data) => (
+        <>
+          <p>{data.language}</p>
+          <BorderLinearProgress variant="determinate" value={data.value} />
+        </>
+      ))}
     </div>
   );
 }

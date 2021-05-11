@@ -40,7 +40,6 @@ const blog: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
-  console.log(isXsSm);
   const cardsPerRow = isXsSm ? 1 : 3;
   return (
     <Layout pageName="Blog">
@@ -71,7 +70,7 @@ const blog: React.FC = () => {
           ))}
         </GridList>
       </div>
-      <Footer/>
+      <Footer />
     </Layout>
   );
 };

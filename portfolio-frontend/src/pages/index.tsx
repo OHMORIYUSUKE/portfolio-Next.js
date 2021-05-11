@@ -3,7 +3,6 @@ import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 
 import Layout from '../layout/layout';
-import { Container, Divider, Typography } from '@material-ui/core';
 import Footer from '../components/Footer';
 
 const Home: React.FC = () => {
@@ -52,7 +51,7 @@ const Home: React.FC = () => {
           </a>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </Layout>
   );
 };

@@ -35,16 +35,16 @@ const StyledTableRow = withStyles((theme: Theme) =>
   })
 )(TableRow);
 
-function createData(name: string, calories: number, fat: number) {
-  return { name, calories, fat };
+function createData(when: string, name: string) {
+  return { when, name };
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Frozen yoghurt', 159, 6.0),
+  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
+  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
+  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
+  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
+  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
 ];
 
 export default function CustomizedTables() {
@@ -53,19 +53,19 @@ export default function CustomizedTables() {
       <Table aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="left">Calories</StyledTableCell>
-            <StyledTableCell align="left">Fat&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>期間</StyledTableCell>
+            <StyledTableCell>イベント名</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
+                {row.when}
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="left">{row.calories}</StyledTableCell>
-              <StyledTableCell align="left">{row.fat}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

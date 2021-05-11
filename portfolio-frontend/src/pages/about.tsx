@@ -7,22 +7,47 @@ import AboutSkill from '../components/AboutSkill';
 import AboutName from '../components/AboutName';
 import AboutLinks from '../components/AboutLinks';
 import Footer from '../components/Footer';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import Head from 'next/head';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '90%',
+      marginBottom: '20px',
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+      },
+    },
+  })
+);
 
 const about: React.FC = () => {
+  const classes = useStyles();
   return (
-    <Layout pageName="About">
-      <Container style={{ width: '90%',marginBottom: '20px' }}>
-        <h2>名前</h2>
-        <AboutName />
-        <h2>スキル</h2>
-        <AboutSkill />
-        <h2>イベント</h2>
-        <AboutEvents />
-        <h2>リンク</h2>
-        <AboutLinks />
-      </Container>
-      <Footer/>
-    </Layout>
+    <>
+      <Head>
+        <title>about</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Layout pageName="About">
+        <Container className={classes.root}>
+          <a id="name"></a>
+          <h2>プロフィール</h2>
+          <AboutName />
+          <a id="skill"></a>
+          <h2>スキル</h2>
+          <AboutSkill />
+          <a id="events"></a>
+          <h2>イベント</h2>
+          <AboutEvents />
+          <a id="links"></a>
+          <h2>リンク</h2>
+          <AboutLinks />
+        </Container>
+        <Footer />
+      </Layout>
+    </>
   );
 };
 

@@ -1,59 +1,74 @@
 import React from 'react';
 import Head from 'next/head';
-import styles from '../../styles/Home.module.css';
 
 import Layout from '../layout/layout';
 import Footer from '../components/Footer';
+import {
+  createStyles,
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  IconButton,
+  makeStyles,
+  Theme,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
+import { blogData } from '../testData/blogData';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      marginBottom: '20px',
+    },
+    gridList: {
+      width: '95%',
+      height: '100%',
+    },
+    icon: {
+      color: 'rgba(255, 255, 255, 0.54)',
+    },
+  })
+);
 
 const works: React.FC = () => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const cardsPerRow = isXsSm ? 1 : 3;
   return (
     <Layout pageName="Works">
       <Head>
         <title>works</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.ts!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}>
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <a id="other"></a>
-      <Footer/>
+      <div className={classes.root}>
+        <GridList
+          cellHeight={180}
+          className={classes.gridList}
+          cols={cardsPerRow}>
+          {blogData.map((tile) => (
+            <GridListTile key={tile.img} cols={1}>
+              <img src={tile.img} alt={tile.title} />
+              <GridListTileBar
+                title={tile.title}
+                subtitle={<span>by: {tile.author}</span>}
+                actionIcon={
+                  <IconButton
+                    aria-label={`info about ${tile.title}`}
+                    className={classes.icon}>
+                    <ChevronRightIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+      <Footer />
     </Layout>
   );
 };
