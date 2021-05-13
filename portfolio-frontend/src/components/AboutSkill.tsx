@@ -36,9 +36,9 @@ export default function AboutSkill() {
 
   return (
     <div className={classes.root}>
-      {skillData.map((data) => (
+      {skillData.map((data, idx) => (
         <>
-          <p>{data.language}</p>
+          <p key={idx}>{data.language}</p>
           <BorderLinearProgress variant="determinate" value={data.value} />
         </>
       ))}

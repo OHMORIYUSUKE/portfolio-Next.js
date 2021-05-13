@@ -3,19 +3,9 @@ import Head from 'next/head';
 
 import Layout from '../layout/layout';
 import Footer from '../components/Footer';
-import {
-  createStyles,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  IconButton,
-  makeStyles,
-  Theme,
-  useMediaQuery,
-  useTheme,
-} from '@material-ui/core';
-import { blogData } from '../testData/blogData';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { createStyles, GridList, makeStyles, Theme } from '@material-ui/core';
+import { workData } from '../testData/workData';
+import WorkCard from '../components/WorkCard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: '20px',
     },
     gridList: {
-      width: '95%',
+      width: '100%',
       height: '100%',
     },
     icon: {
@@ -36,9 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const works: React.FC = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const cardsPerRow = isXsSm ? 1 : 3;
   return (
     <Layout pageName="Works">
       <Head>
@@ -46,25 +33,15 @@ const works: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={classes.root}>
-        <GridList
-          cellHeight={180}
-          className={classes.gridList}
-          cols={cardsPerRow}>
-          {blogData.map((tile) => (
-            <GridListTile key={tile.img} cols={1}>
-              <img src={tile.img} alt={tile.title} />
-              <GridListTileBar
-                title={tile.title}
-                subtitle={<span>by: {tile.author}</span>}
-                actionIcon={
-                  <IconButton
-                    aria-label={`info about ${tile.title}`}
-                    className={classes.icon}>
-                    <ChevronRightIcon />
-                  </IconButton>
-                }
-              />
-            </GridListTile>
+        <GridList cellHeight={180} className={classes.gridList}>
+          {workData.map((data, idx) => (
+            <WorkCard
+              key={idx}
+              img={data.img}
+              title={data.title}
+              description={data.description}
+              url={data.url}
+            />
           ))}
         </GridList>
       </div>

@@ -6,9 +6,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -19,10 +16,7 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 
-import Link from '@material-ui/core/Link';
-
 import dynamic from 'next/dynamic';
-import Footer from '../components/Footer';
 import SideMenuLinks from '../components/SideMenuLinks';
 
 const drawerWidth = 240;
