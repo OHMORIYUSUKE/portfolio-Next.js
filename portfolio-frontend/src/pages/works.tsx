@@ -3,17 +3,7 @@ import Head from 'next/head';
 
 import Layout from '../layout/layout';
 import Footer from '../components/Footer';
-import {
-  createStyles,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  IconButton,
-  makeStyles,
-  Theme,
-  useMediaQuery,
-  useTheme,
-} from '@material-ui/core';
+import { createStyles, GridList, makeStyles, Theme } from '@material-ui/core';
 import { workData } from '../testData/workData';
 import WorkCard from '../components/WorkCard';
 
@@ -44,11 +34,13 @@ const works: React.FC = () => {
       </Head>
       <div className={classes.root}>
         <GridList cellHeight={180} className={classes.gridList}>
-          {workData.map((data) => (
+          {workData.map((data, idx) => (
             <WorkCard
+              key={idx}
               img={data.img}
               title={data.title}
               description={data.description}
+              url={data.url}
             />
           ))}
         </GridList>

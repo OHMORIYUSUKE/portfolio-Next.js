@@ -34,8 +34,12 @@ export function SideMenuBlog(): JSX.Element {
       </ListItem>
       {/* ---プルダウン--- */}
       <Collapse in={expanded}>
-        {blogTag.map((data) => (
-          <Link href={'/blog#' + data.tag} underline="none" color="textPrimary">
+        {blogTag.map((data, idx) => (
+          <Link
+            href={'/blog#' + data.tag}
+            underline="none"
+            color="textPrimary"
+            key={idx}>
             <ListItem button>
               <ListItemIcon>
                 <ChevronRightIcon />

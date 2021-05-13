@@ -1,5 +1,4 @@
 import { Link, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { List } from '@material-ui/icons';
 import React from 'react';
 
 import GitHubIcon from '@material-ui/icons/GitHub';

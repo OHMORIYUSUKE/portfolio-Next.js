@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  withStyles,
-  Theme,
-  createStyles,
-  makeStyles,
-} from '@material-ui/core/styles';
+import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { aboutEvent } from '../testData/aboutEvent';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -35,18 +31,6 @@ const StyledTableRow = withStyles((theme: Theme) =>
   })
 )(TableRow);
 
-function createData(when: string, name: string) {
-  return { when, name };
-}
-
-const rows = [
-  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
-  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
-  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
-  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
-  createData('2021年3月15日～2021年3月26日', 'Open Hack U 2020 Online Vol.5'),
-];
-
 export default function CustomizedTables() {
   return (
     <TableContainer component={Paper}>
@@ -58,13 +42,13 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {aboutEvent.map((data, idx) => (
+            <StyledTableRow key={idx}>
               <StyledTableCell component="th" scope="row">
-                {row.when}
+                {data.start} ⇒ {data.end}
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {data.name}
               </StyledTableCell>
             </StyledTableRow>
           ))}

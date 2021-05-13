@@ -33,6 +33,14 @@ const useStyles = makeStyles((theme: Theme) =>
     icon: {
       color: 'rgba(255, 255, 255, 0.54)',
     },
+    img: {
+      transition: theme.transitions.create(['opacity'], {
+        duration: theme.transitions.duration.complex,
+      }),
+      '&:hover': {
+        opacity: 0.8,
+      },
+    },
   })
 );
 
@@ -52,20 +60,22 @@ const blog: React.FC = () => {
           cellHeight={180}
           className={classes.gridList}
           cols={cardsPerRow}>
-          {blogData.map((tile) => (
-            <GridListTile key={tile.img} cols={1}>
-              <img src={tile.img} alt={tile.title} />
-              <GridListTileBar
-                title={tile.title}
-                subtitle={<span>by: {tile.author}</span>}
-                actionIcon={
-                  <IconButton
-                    aria-label={`info about ${tile.title}`}
-                    className={classes.icon}>
-                    <ChevronRightIcon />
-                  </IconButton>
-                }
-              />
+          {blogData.map((tile, idx) => (
+            <GridListTile key={idx} cols={1}>
+              <div className={classes.img}>
+                <img src={tile.img} alt={tile.title} />
+                <GridListTileBar
+                  title={tile.title}
+                  subtitle={<span>by: {tile.author}</span>}
+                  actionIcon={
+                    <IconButton
+                      aria-label={`info about ${tile.title}`}
+                      className={classes.icon}>
+                      <ChevronRightIcon />
+                    </IconButton>
+                  }
+                />
+              </div>
             </GridListTile>
           ))}
         </GridList>
