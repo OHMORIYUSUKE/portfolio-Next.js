@@ -38,7 +38,23 @@ export function SideMenuWorks(): JSX.Element {
             <ListItemIcon>
               <ChevronRightIcon />
             </ListItemIcon>
-            <ListItemText primary={'プログラミング'} />
+            <ListItemText primary={'Web'} />
+          </ListItem>
+        </Link>
+        <Link href={'/works/#programming'} underline="none" color="textPrimary">
+          <ListItem button>
+            <ListItemIcon>
+              <ChevronRightIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Blender'} />
+          </ListItem>
+        </Link>
+        <Link href={'/works/#programming'} underline="none" color="textPrimary">
+          <ListItem button>
+            <ListItemIcon>
+              <ChevronRightIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Unity'} />
           </ListItem>
         </Link>
         <Link href={'/works/#other'} underline="none" color="textPrimary">
