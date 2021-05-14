@@ -27,6 +27,7 @@ type Props = {
   title: string;
   description: string;
   url: string;
+  flag: string;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -128,8 +129,10 @@ const WorkCard: React.FC<Props> = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.buttonLink}>
-          <Button size="small" color="primary" href={props.url}>
-            Webサイトへ <ChevronRightIcon />
+          <Button style={{textTransform: 'none'}} size="small" color="primary" href={props.url}>
+          {props.flag==='web'
+                ? 'Webサイト'
+                : 'YouTube'} <ChevronRightIcon />
           </Button>
         </CardActions>
       </Card>
@@ -147,11 +150,15 @@ const WorkCard: React.FC<Props> = (props) => {
             image={props.img}
             title={props.title}
           />
-          <Typography gutterBottom>{props.description}</Typography>
+          <Typography gutterBottom style={{ marginTop: '17px' }}>
+            {props.description}
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus href={props.url} color="primary">
-            Webサイトへ <ChevronRightIcon />
+          <Button style={{textTransform: 'none'}} autoFocus href={props.url} color="primary">
+          {props.flag==='web'
+                ? 'Webサイト'
+                : 'YouTube'} <ChevronRightIcon />
           </Button>
         </DialogActions>
       </Dialog>

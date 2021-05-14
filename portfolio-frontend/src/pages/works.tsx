@@ -37,6 +37,7 @@ const works: React.FC = () => {
           {workData.map((data, idx) => (
             <WorkCard
               key={idx}
+              flag={data.flag}
               img={data.img}
               title={data.title}
               description={data.description}
