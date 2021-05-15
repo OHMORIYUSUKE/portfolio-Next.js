@@ -27,27 +27,29 @@ const useStyles = makeStyles((theme: Theme) =>
 const works: React.FC = () => {
   const classes = useStyles();
   return (
-    <Layout pageName="Works">
+    <>
       <Head>
-        <title>works</title>
+        <title>Works</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={classes.root}>
-        <GridList cellHeight={180} className={classes.gridList}>
-          {workData.map((data, idx) => (
-            <WorkCard
-              key={idx}
-              flag={data.flag}
-              img={data.img}
-              title={data.title}
-              description={data.description}
-              url={data.url}
-            />
-          ))}
-        </GridList>
-      </div>
-      <Footer />
-    </Layout>
+      <Layout pageName="Works">
+        <div className={classes.root}>
+          <GridList cellHeight={180} className={classes.gridList}>
+            {workData.map((data, idx) => (
+              <WorkCard
+                key={idx}
+                flag={data.flag}
+                img={data.img}
+                title={data.title}
+                description={data.description}
+                url={data.url}
+              />
+            ))}
+          </GridList>
+        </div>
+        <Footer />
+      </Layout>
+    </>
   );
 };
 

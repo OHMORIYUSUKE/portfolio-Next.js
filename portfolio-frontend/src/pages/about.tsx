@@ -27,7 +27,7 @@ const about: React.FC = () => {
   return (
     <>
       <Head>
-        <title>about</title>
+        <title>About</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout pageName="About">

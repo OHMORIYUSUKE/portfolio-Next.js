@@ -129,10 +129,13 @@ const WorkCard: React.FC<Props> = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.buttonLink}>
-          <Button style={{textTransform: 'none'}} size="small" color="primary" href={props.url}>
-          {props.flag==='web'
-                ? 'Webサイト'
-                : 'YouTube'} <ChevronRightIcon />
+          <Button
+            style={{ textTransform: 'none' }}
+            size="small"
+            color="primary"
+            href={props.url}>
+            {props.flag === 'web' ? 'Webサイト' : 'YouTube'}{' '}
+            <ChevronRightIcon />
           </Button>
         </CardActions>
       </Card>
@@ -155,10 +158,13 @@ const WorkCard: React.FC<Props> = (props) => {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button style={{textTransform: 'none'}} autoFocus href={props.url} color="primary">
-          {props.flag==='web'
-                ? 'Webサイト'
-                : 'YouTube'} <ChevronRightIcon />
+          <Button
+            style={{ textTransform: 'none' }}
+            autoFocus
+            href={props.url}
+            color="primary">
+            {props.flag === 'web' ? 'Webサイト' : 'YouTube'}{' '}
+            <ChevronRightIcon />
           </Button>
         </DialogActions>
       </Dialog>

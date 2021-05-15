@@ -18,6 +18,7 @@ import {
 
 import dynamic from 'next/dynamic';
 import SideMenuLinks from '../components/SideMenuLinks';
+import { Link } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -88,12 +89,14 @@ export default function ResponsiveDrawer(props: Props) {
   const drawer = (
     <div>
       <div className={classes.toolbar}>
-        <Typography align="center" variant="h4" color="textSecondary">
-          Portfolio
-        </Typography>
-        <Typography align="center" variant="subtitle2" color="textSecondary">
-          v2.0.0
-        </Typography>
+        <Link href="/" underline="none">
+          <Typography align="center" variant="h4" color="textSecondary">
+            Portfolio
+          </Typography>
+          <Typography align="center" variant="subtitle2" color="textSecondary">
+            v2.0.0
+          </Typography>
+        </Link>
       </div>
       <Divider />
       <List>
