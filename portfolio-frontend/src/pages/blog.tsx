@@ -18,6 +18,7 @@ import { blogData } from '../testData/blogData';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Footer from '../components/Footer';
+import { ListSubheader } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,14 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
     icon: {
       color: 'rgba(255, 255, 255, 0.54)',
     },
-    img: {
-      transition: theme.transitions.create(['opacity'], {
-        duration: theme.transitions.duration.complex,
-      }),
-      '&:hover': {
-        opacity: 0.8,
-      },
-    },
   })
 );
 
@@ -49,24 +42,25 @@ const blog: React.FC = () => {
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const cardsPerRow = isXsSm ? 1 : 3;
+
   return (
-    <Layout pageName="Blog">
+    <>
       <Head>
-        <title>blog</title>
+        <title>Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={classes.root}>
-        <GridList
-          cellHeight={180}
-          className={classes.gridList}
-          cols={cardsPerRow}>
-          {blogData.map((tile, idx) => (
-            <GridListTile key={idx} cols={1}>
-              <div className={classes.img}>
+      <Layout pageName="Blog">
+        <div className={classes.root}>
+          <GridList
+            cols={cardsPerRow}
+            cellHeight={180}
+            className={classes.gridList}>
+            {blogData.map((tile) => (
+              <GridListTile key={tile.img}>
                 <img src={tile.img} alt={tile.title} />
                 <GridListTileBar
                   title={tile.title}
-                  subtitle={<span>by: {tile.author}</span>}
+                  subtitle={<span>Created at {tile.createdAt}</span>}
                   actionIcon={
                     <IconButton
                       aria-label={`info about ${tile.title}`}
@@ -75,13 +69,13 @@ const blog: React.FC = () => {
                     </IconButton>
                   }
                 />
-              </div>
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
-      <Footer />
-    </Layout>
+              </GridListTile>
+            ))}
+          </GridList>
+        </div>
+        <Footer />
+      </Layout>
+    </>
   );
 };
 
