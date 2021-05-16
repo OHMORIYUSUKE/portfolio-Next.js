@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-          {/* シンタックスハイライト */}
+          {/* シンタックスハイライト tomorrow-night-blue.min.css */}
           <link
             href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/tomorrow-night-blue.min.css"
             rel="stylesheet"

@@ -133,7 +133,6 @@ function Works(props) {
         {workData.slice(0, props.carouselNumber).map((item, i) => (
           <a href={item.url}>
             <Paper elevation={3} key={i}>
-              {/* <img src={item.img} alt="" style={{width: '75%',height: '300px'}}/> */}
               <CardMedia
                 style={{ height: props.carouselHeight }}
                 image={item.img}

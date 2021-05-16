@@ -25,6 +25,8 @@ import Router, { useRouter } from 'next/router';
 import marked from 'marked';
 import Highlight from 'react-highlight';
 
+import { markedOption, markedRender } from '../../lib/marked';
+
 import { blogData } from '../../testData/blogData';
 
 import Layout from '../../layout/layout';
@@ -54,11 +56,11 @@ const blogDetail: React.FC = () => {
       <Layout pageName="Article">
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
-            <Grid item sm={11}>
-              {blogData.map((tile) => {
+            <Grid item sm={10}>
+              {blogData.map((tile, i) => {
                 return Number(tile.id) == Number(id) ? (
                   <>
-                    <div style={{ display: 'block' }}>
+                    <div style={{ display: 'block' }} key={i}>
                       <Typography
                         component="h4"
                         variant="h4"
@@ -89,7 +91,9 @@ const blogDetail: React.FC = () => {
                           paddingRight: 15,
                         }}>
                         <Highlight innerHTML={true}>
-                          {marked(tile.content)}
+                          {markedOption(tile.content, {
+                            renderer: markedRender(),
+                          })}
                         </Highlight>
                       </div>
                     </Paper>
