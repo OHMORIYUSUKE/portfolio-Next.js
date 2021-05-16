@@ -23,11 +23,19 @@ import EventIcon from '@material-ui/icons/Event';
 import Router, { useRouter } from 'next/router';
 
 import marked from 'marked';
+import Highlight from 'react-highlight';
 
 import { blogData } from '../../testData/blogData';
 
 import Layout from '../../layout/layout';
 import Footer from '../../components/Footer';
+
+//markedのoptionを設定
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+  silent: false,
+});
 
 const blogDetail: React.FC = () => {
   const router = useRouter();
@@ -80,10 +88,9 @@ const blogDetail: React.FC = () => {
                           paddingLeft: 15,
                           paddingRight: 15,
                         }}>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: marked(tile.content),
-                          }}></span>
+                        <Highlight innerHTML={true}>
+                          {marked(tile.content)}
+                        </Highlight>
                       </div>
                     </Paper>
                   </>
