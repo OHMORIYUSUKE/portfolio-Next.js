@@ -131,16 +131,17 @@ function Works(props) {
         timeout={1000}
         navButtonsAlwaysVisible={false}>
         {workData.slice(0, props.carouselNumber).map((item, i) => (
+                      <a href={item.url}>
           <Paper elevation={3} key={i}>
-            <a href={item.url}>
               {/* <img src={item.img} alt="" style={{width: '75%',height: '300px'}}/> */}
               <CardMedia
                 style={{ height: props.carouselHeight }}
                 image={item.img}
                 title={item.title}
               />
-            </a>
+
           </Paper>
+          </a>
         ))}
       </Carousel>
     </Grid>
@@ -169,7 +170,8 @@ function Blog(props) {
         timeout={1000}
         navButtonsAlwaysVisible={false}>
         {blogData.slice(0, props.carouselNumber).map((item, i) => (
-          <Paper elevation={3} style={{ display: 'flex' }} key={i}>
+                      <a href={'/blog/'+item.id}>
+          <Paper elevation={3} style={{ display: 'flex' }} key={i} square>
             <CardMedia
               style={{ height: props.carouselHeight, width: '70%' }}
               image={item.img}
@@ -183,7 +185,9 @@ function Blog(props) {
                 {item.createdAt}
               </Typography>
             </div>
+            
           </Paper>
+          </a>
         ))}
       </Carousel>
     </Grid>

@@ -60,9 +60,10 @@ const blog: React.FC = () => {
                 <img src={tile.img} alt={tile.title} />
                 <GridListTileBar
                   title={tile.title}
-                  subtitle={<span>Created at {tile.createdAt}</span>}
+                  subtitle={<span>{tile.createdAt}</span>}
                   actionIcon={
                     <IconButton
+                      href={'/blog/' + tile.id}
                       aria-label={`info about ${tile.title}`}
                       className={classes.icon}>
                       <ChevronRightIcon />
