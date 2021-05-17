@@ -31,7 +31,8 @@ import { blogData } from '../../testData/blogData';
 
 import Layout from '../../layout/layout';
 import Footer from '../../components/Footer';
-import BlogSnsShare from '../../components/BlogSnsShare';
+import BlogSnsShareSide from '../../components/BlogSnsShareSide';
+import BlogSnsShareBottom from '../../components/BlogSnsShareBottom';
 
 //markedのoptionを設定
 marked.setOptions({
@@ -106,9 +107,10 @@ const blogDetail: React.FC = () => {
                             renderer: markedRender(),
                           })}
                         </Highlight>
+                        <BlogSnsShareBottom />
                       </div>
                     </Paper>
-                    <BlogSnsShare />
+                    <BlogSnsShareSide />
                   </>
                 ) : (
                   <></>
