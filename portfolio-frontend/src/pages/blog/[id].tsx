@@ -61,10 +61,6 @@ const blogDetail: React.FC = () => {
   }, []);
   return (
     <>
-      <Head>
-        <title>Blog</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Layout pageName="Article">
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
@@ -72,6 +68,21 @@ const blogDetail: React.FC = () => {
               {blogData.map((tile, i) => {
                 return Number(tile.id) == Number(id) ? (
                   <>
+                    <Head>
+                      <title>Blog</title>
+                      <link rel="icon" href="/favicon.ico" />
+                      <meta property="og:title" content="Portforio" />
+                      <meta property="og:type" content="website" />
+                      <meta
+                        property="og:url"
+                        content={process.env.baseUrl + '/blog/' + tile.id}
+                      />
+                      <meta property="og:image" content={tile.img} />
+                      <meta property="og:site_name" content="Portforio" />
+                      <meta property="og:description" content={tile.title} />
+                      {/* Twitter設定 */}
+                      <meta name="twitter:card" content="summary_large_image" />
+                    </Head>
                     <div style={{ display: 'block' }} key={i}>
                       <Typography
                         component="h4"
@@ -107,10 +118,10 @@ const blogDetail: React.FC = () => {
                             renderer: markedRender(),
                           })}
                         </Highlight>
-                        <BlogSnsShareBottom />
+                        <BlogSnsShareBottom title={tile.title} />
                       </div>
                     </Paper>
-                    <BlogSnsShareSide />
+                    <BlogSnsShareSide title={tile.title} />
                   </>
                 ) : (
                   <></>

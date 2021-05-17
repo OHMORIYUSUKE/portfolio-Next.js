@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BlogSnsShareSide() {
+export default function BlogSnsShareSide(props) {
   const classes = useStyles();
 
   const theme = useTheme();
@@ -46,27 +46,32 @@ export default function BlogSnsShareSide() {
     <div className={classes.root}>
       <Paper elevation={3} className={classes.paper}>
         <TwitterShareButton
-          url={'https://portfolio-puce-beta.vercel.app' + location.pathname}>
+          title={props.title}
+          url={process.env.baseUrl + location.pathname}>
           <TwitterIcon size={40} round />
         </TwitterShareButton>
         <br />
         <FacebookShareButton
-          url={'https://portfolio-puce-beta.vercel.app' + location.pathname}>
+          title={props.title}
+          url={process.env.baseUrl + location.pathname}>
           <FacebookIcon size={40} round />
         </FacebookShareButton>
         <br />
         <LineShareButton
-          url={'https://portfolio-puce-beta.vercel.app' + location.pathname}>
+          title={props.title}
+          url={process.env.baseUrl + location.pathname}>
           <LineIcon size={40} round />
         </LineShareButton>
         <br />
         <HatenaShareButton
-          url={'https://portfolio-puce-beta.vercel.app' + location.pathname}>
+          title={props.title}
+          url={process.env.baseUrl + location.pathname}>
           <HatenaIcon size={40} round />
         </HatenaShareButton>
         <br />
         <PocketShareButton
-          url={'https://portfolio-puce-beta.vercel.app' + location.pathname}>
+          title={props.title}
+          url={process.env.baseUrl + location.pathname}>
           <PocketIcon size={40} round />
         </PocketShareButton>
       </Paper>
