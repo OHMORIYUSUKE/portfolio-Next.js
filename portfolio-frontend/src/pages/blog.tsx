@@ -55,8 +55,8 @@ const blog: React.FC = () => {
             cols={cardsPerRow}
             cellHeight={180}
             className={classes.gridList}>
-            {blogData.map((tile) => (
-              <GridListTile key={tile.img}>
+            {blogData.map((tile, i) => (
+              <GridListTile key={i}>
                 <img src={tile.img} alt={tile.title} />
                 <GridListTileBar
                   title={tile.title}

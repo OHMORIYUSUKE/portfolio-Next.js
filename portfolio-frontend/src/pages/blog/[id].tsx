@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import {
   Paper,
@@ -47,6 +47,16 @@ const blogDetail: React.FC = () => {
 
   const id = router.query.id;
 
+  useEffect(() => {
+    // scriptを読み込み
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    document.body.appendChild(script);
+    // アンマウント時に一応scriptタグを消しておく
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <>
       <Head>

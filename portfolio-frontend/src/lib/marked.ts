@@ -62,6 +62,29 @@ export const markedRender = function () {
     <p class="paragraph">${text}</p>
     `;
   };
+  renderer.listitem = function (text) {
+    return `
+    <style>
+    ol {
+        counter-reset: li; 
+        list-style: none; 
+      }
+      
+      li {
+        line-height: 1.8;
+      }
+      
+      ol > li::before {
+        margin-right: 0.25rem;
+        content:counter(li) ".";
+        counter-increment: li;
+        font-size: 24px;
+        font-weight: lighter;
+      }
+    </style>
+    <li>${text}</li>
+    `;
+  };
   //最後にまとめてrendererを返す
   return renderer;
 };

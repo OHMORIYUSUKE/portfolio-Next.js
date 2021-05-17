@@ -150,7 +150,7 @@ function Blog(props) {
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const TitleSpace = isXsSm ? 17 : 50;
-  const TextfontSize = isXsSm ? 'h5' : 'h4';
+  const TextfontSize = isXsSm ? 'h6' : 'h5';
   return (
     <Grid item xs={props.carouselWidth}>
       <Link href={'/blog'} underline="none" color="textPrimary">
@@ -171,7 +171,7 @@ function Blog(props) {
           <a href={'/blog/' + item.id}>
             <Paper elevation={3} style={{ display: 'flex' }} key={i} square>
               <CardMedia
-                style={{ height: props.carouselHeight, width: '70%' }}
+                style={{ height: props.carouselHeight, minWidth: '60%' }}
                 image={item.img}
                 title={item.title}
               />

@@ -14,3 +14,20 @@ a {
 * {
   box-sizing: border-box;
 }
+.twitter-tweet {
+  width: '90%';
+  margin-left: 13.5%;
+}
+
+@media (max-width: 500px) {
+  .twitter-tweet {
+    width: '100%';
+    margin-left: 0;
+  }
+  .hljs {
+    padding: 15px;
+    border-radius: 4px;
+    width: 80vw;
+    overflow-x: auto;
+  }
+}
