@@ -131,16 +131,15 @@ function Works(props) {
         timeout={1000}
         navButtonsAlwaysVisible={false}>
         {workData.slice(0, props.carouselNumber).map((item, i) => (
-          <Paper elevation={3} key={i}>
-            <a href={item.url}>
-              {/* <img src={item.img} alt="" style={{width: '75%',height: '300px'}}/> */}
+          <a href={item.url}>
+            <Paper elevation={3} key={i}>
               <CardMedia
                 style={{ height: props.carouselHeight }}
                 image={item.img}
                 title={item.title}
               />
-            </a>
-          </Paper>
+            </Paper>
+          </a>
         ))}
       </Carousel>
     </Grid>
@@ -151,7 +150,7 @@ function Blog(props) {
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const TitleSpace = isXsSm ? 17 : 50;
-  const TextfontSize = isXsSm ? 'h5' : 'h4';
+  const TextfontSize = isXsSm ? 'h6' : 'h5';
   return (
     <Grid item xs={props.carouselWidth}>
       <Link href={'/blog'} underline="none" color="textPrimary">
@@ -169,21 +168,23 @@ function Blog(props) {
         timeout={1000}
         navButtonsAlwaysVisible={false}>
         {blogData.slice(0, props.carouselNumber).map((item, i) => (
-          <Paper elevation={3} style={{ display: 'flex' }} key={i}>
-            <CardMedia
-              style={{ height: props.carouselHeight, width: '70%' }}
-              image={item.img}
-              title={item.title}
-            />
-            <div style={{ margin: TitleSpace }}>
-              <Typography component={TextfontSize} variant={TextfontSize}>
-                {item.title}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {item.createdAt}
-              </Typography>
-            </div>
-          </Paper>
+          <a href={'/blog/' + item.id}>
+            <Paper elevation={3} style={{ display: 'flex' }} key={i} square>
+              <CardMedia
+                style={{ height: props.carouselHeight, minWidth: '60%' }}
+                image={item.img}
+                title={item.title}
+              />
+              <div style={{ margin: TitleSpace }}>
+                <Typography component={TextfontSize} variant={TextfontSize}>
+                  {item.title}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  {item.createdAt}
+                </Typography>
+              </div>
+            </Paper>
+          </a>
         ))}
       </Carousel>
     </Grid>

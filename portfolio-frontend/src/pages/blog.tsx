@@ -55,14 +55,15 @@ const blog: React.FC = () => {
             cols={cardsPerRow}
             cellHeight={180}
             className={classes.gridList}>
-            {blogData.map((tile) => (
-              <GridListTile key={tile.img}>
+            {blogData.map((tile, i) => (
+              <GridListTile key={i}>
                 <img src={tile.img} alt={tile.title} />
                 <GridListTileBar
                   title={tile.title}
-                  subtitle={<span>Created at {tile.createdAt}</span>}
+                  subtitle={<span>{tile.createdAt}</span>}
                   actionIcon={
                     <IconButton
+                      href={'/blog/' + tile.id}
                       aria-label={`info about ${tile.title}`}
                       className={classes.icon}>
                       <ChevronRightIcon />
