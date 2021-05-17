@@ -23,6 +23,10 @@ iframe {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.hljs {
+  padding: 15px;
+  border-radius: 4px;
+}
 
 @media (max-width: 500px) {
   .twitter-tweet {
