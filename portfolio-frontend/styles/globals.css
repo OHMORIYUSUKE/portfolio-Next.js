@@ -18,16 +18,27 @@ a {
   width: '90%';
   margin-left: 13.5%;
 }
+iframe {
+  margin-left: 13.5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 @media (max-width: 500px) {
   .twitter-tweet {
     width: '100%';
     margin-left: 0;
   }
+  iframe {
+    margin-left: 0;
+    border: none;
+    width: 79vw;
+    height: 20vh;
+  }
   .hljs {
     padding: 15px;
     border-radius: 4px;
-    width: 80vw;
+    width: 79vw;
     overflow-x: auto;
   }
 }
