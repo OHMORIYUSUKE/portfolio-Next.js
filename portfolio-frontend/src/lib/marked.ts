@@ -45,16 +45,18 @@ export const markedRender = function () {
     }
     
     th,td {
-        padding: 5px 25px;          /* 余白指定 */
+        padding: 5px 30px;          /* 余白指定 */
     }
     table th{/*thに対して*/
         color: #ffff;/*文字色*/
         background: #2196F3;/*背景色*/
       }</style>
+    <div class="scroll-table">
     <table class="contentTable">
     <thead class="contentThead">${header}</thead>
     <tbody class="contentTbody">${body}</tbody>
     </table>
+    </div>
     `;
   };
   renderer.paragraph = function (text) {
@@ -84,6 +86,18 @@ export const markedRender = function () {
     </style>
     <li>${text}</li>
     `;
+  };
+  renderer.hr = function () {
+    return `
+    <style>
+    hr{
+      height: 1.5px;
+      background-color: #000080;
+      border: none;
+      color: #000080;
+    }
+    </style>
+    <hr>`;
   };
   //最後にまとめてrendererを返す
   return renderer;
