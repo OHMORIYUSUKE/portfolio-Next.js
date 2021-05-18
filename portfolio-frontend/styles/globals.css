@@ -18,6 +18,10 @@ a {
   width: '90%';
   margin-left: 11%;
 }
+.twitter-timeline {
+  width: '90%';
+  margin-left: 25%;
+}
 iframe {
   margin-left: 14%;
   margin-top: 5px;
@@ -27,9 +31,16 @@ iframe {
   padding: 15px;
   border-radius: 4px;
 }
+.scroll-table {
+  padding: 5px;
+}
 
 @media (max-width: 500px) {
   .twitter-tweet {
+    width: '100%';
+    margin-left: 0;
+  }
+  .twitter-timeline {
     width: '100%';
     margin-left: 0;
   }
@@ -42,6 +53,11 @@ iframe {
   .hljs {
     padding: 15px;
     border-radius: 4px;
+    width: 79vw;
+    overflow-x: auto;
+  }
+  .scroll-table {
+    padding: 5px;
     width: 79vw;
     overflow-x: auto;
   }
