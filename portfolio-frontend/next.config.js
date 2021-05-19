@@ -5,5 +5,6 @@ module.exports = {
     baseUrl: dev
       ? 'http://localhost:3000'
       : 'https://portfolio-puce-beta.vercel.app',
+    MKEY: process.env.MKEY,
   },
 };

@@ -9,6 +9,7 @@ import AboutLinks from '../components/AboutLinks';
 import Footer from '../components/Footer';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import Head from 'next/head';
+import OGPHead from '../components/OGPHead';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,10 +27,7 @@ const about: React.FC = () => {
   const classes = useStyles();
   return (
     <>
-      <Head>
-        <title>About</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <OGPHead pageName={'About'} />
       <Layout pageName="About">
         <Container className={classes.root}>
           <a id="name"></a>

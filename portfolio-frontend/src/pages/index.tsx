@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import Layout from '../layout/layout';
@@ -32,6 +32,8 @@ import Image from 'next/image';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import EmailIcon from '@material-ui/icons/Email';
+import axios from 'axios';
+import OGPHead from '../components/OGPHead';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -151,43 +153,65 @@ function Blog(props) {
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const TitleSpace = isXsSm ? 17 : 50;
   const TextfontSize = isXsSm ? 'h6' : 'h5';
+
+  const [posts, setPosts] = useState([]);
+
+  console.log(posts);
+  // 無限ループを回避する
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(
+          'https://y-ohmori-portfolio.microcms.io/api/v1/blog',
+          { headers: { 'X-API-KEY': process.env.MKEY } }
+        );
+        setPosts(res.data.contents);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
   return (
-    <Grid item xs={props.carouselWidth}>
-      <Link href={'/blog'} underline="none" color="textPrimary">
-        <h2 style={{ textAlign: 'center' }}>Blog</h2>
-      </Link>
-      <Carousel
-        next={() => {
-          /* Do stuff */
-        }}
-        prev={() => {
-          /* Do other stuff */
-        }}
-        animation="slide"
-        interval={3500}
-        timeout={1000}
-        navButtonsAlwaysVisible={false}>
-        {blogData.slice(0, props.carouselNumber).map((item, i) => (
-          <a href={'/blog/' + item.id}>
-            <Paper elevation={3} style={{ display: 'flex' }} key={i} square>
-              <CardMedia
-                style={{ height: props.carouselHeight, minWidth: '60%' }}
-                image={item.img}
-                title={item.title}
-              />
-              <div style={{ margin: TitleSpace }}>
-                <Typography component={TextfontSize} variant={TextfontSize}>
-                  {item.title}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  {item.createdAt}
-                </Typography>
-              </div>
-            </Paper>
-          </a>
-        ))}
-      </Carousel>
-    </Grid>
+    <>
+      <OGPHead pageName={'TOP'} />
+      <Grid item xs={props.carouselWidth}>
+        <Link href={'/blog'} underline="none" color="textPrimary">
+          <h2 style={{ textAlign: 'center' }}>Blog</h2>
+        </Link>
+        <Carousel
+          next={() => {
+            /* Do stuff */
+          }}
+          prev={() => {
+            /* Do other stuff */
+          }}
+          animation="slide"
+          interval={3500}
+          timeout={1000}
+          navButtonsAlwaysVisible={false}>
+          {posts.slice(0, props.carouselNumber).map((item, i) => (
+            <a href={'/blog/' + item.id}>
+              <Paper elevation={3} style={{ display: 'flex' }} key={i} square>
+                <CardMedia
+                  style={{ height: props.carouselHeight, minWidth: '60%' }}
+                  image={item.image.url}
+                  title={item.title}
+                />
+                <div style={{ margin: TitleSpace }}>
+                  <Typography component={TextfontSize} variant={TextfontSize}>
+                    {item.title}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {item.createdAt}
+                  </Typography>
+                </div>
+              </Paper>
+            </a>
+          ))}
+        </Carousel>
+      </Grid>
+    </>
   );
 }
 
