@@ -109,8 +109,8 @@ const WorkCard: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Card className={classes.root} onClick={handleClickOpen}>
-        <CardActionArea>
+      <Card className={classes.root}>
+        <CardActionArea onClick={handleClickOpen}>
           <CardMedia
             component="img"
             alt={props.title}
@@ -131,11 +131,12 @@ const WorkCard: React.FC<Props> = (props) => {
         <CardActions className={classes.buttonLink}>
           <Button
             style={{ textTransform: 'none' }}
-            size="small"
+            size="large"
             color="primary"
-            href={props.url}>
-            {props.flag === 'web' ? 'Webサイト' : 'YouTube'}{' '}
-            <ChevronRightIcon />
+            href={props.url}
+            target="_blank"
+            rel="noopener noreferrer">
+            {props.flag} <ChevronRightIcon />
           </Button>
         </CardActions>
       </Card>
@@ -160,11 +161,12 @@ const WorkCard: React.FC<Props> = (props) => {
         <DialogActions>
           <Button
             style={{ textTransform: 'none' }}
-            autoFocus
+            size="large"
+            color="primary"
             href={props.url}
-            color="primary">
-            {props.flag === 'web' ? 'Webサイト' : 'YouTube'}{' '}
-            <ChevronRightIcon />
+            target="_blank"
+            rel="noopener noreferrer">
+            {props.flag} <ChevronRightIcon />
           </Button>
         </DialogActions>
       </Dialog>

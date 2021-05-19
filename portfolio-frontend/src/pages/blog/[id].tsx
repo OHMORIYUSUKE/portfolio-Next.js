@@ -105,8 +105,10 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                   variant="subtitle1"
                   color="textSecondary"
                   align="center"
-                  style={{marginBottom:7,marginTop:7}}>
-                  <EventIcon style={{display: 'inline-flex',verticalAlign: 'middle'}} />
+                  style={{ marginBottom: 7, marginTop: 7 }}>
+                  <EventIcon
+                    style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+                  />
                   {updatedAt}
                 </Typography>
               </div>

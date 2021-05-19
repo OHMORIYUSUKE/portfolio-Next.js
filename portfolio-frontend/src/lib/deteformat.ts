@@ -1,4 +1,4 @@
-import zeroPadding from "./zeroPadding";
+import zeroPadding from './zeroPadding';
 
 const deteformat = (date: string): string => {
   const D = new Date(date);
@@ -12,9 +12,7 @@ const deteformat = (date: string): string => {
     month,
     2
   )}/${zeroPadding(d, 2)} ${zeroPadding(h, 2)}:${zeroPadding(min, 2)}`;
-    return (
-      updatedAt
-    );
-  };
-  
-  export default deteformat;
+  return updatedAt;
+};
+
+export default deteformat;
