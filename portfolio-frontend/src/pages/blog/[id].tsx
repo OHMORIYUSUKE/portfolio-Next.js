@@ -37,6 +37,8 @@ import BlogSnsShareBottom from '../../components/BlogSnsShareBottom';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import OGPHead from '../../components/OGPHead';
+import fetch from 'node-fetch';
+import zeroPadding from '../../lib/zeroPadding';
 
 //markedのoptionを設定
 marked.setOptions({
@@ -45,7 +47,15 @@ marked.setOptions({
   silent: false,
 });
 
-const blogDetail: React.FC = () => {
+type Props = {
+  postId: string;
+  title: string;
+  updatedAt: string;
+  content: string;
+  imageUrl: string;
+};
+
+function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
   const BlogSnsShareBottom = dynamic(() =>
     import('../../components/BlogSnsShareBottom').then(
       (mod) => mod.BlogSnsShareBottom
@@ -56,69 +66,28 @@ const blogDetail: React.FC = () => {
       (mod) => mod.BlogSnsShareSide
     )
   );
-  const router = useRouter();
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const imageHeight = isXsSm ? 180 : 250;
 
-  const id = router.query.id;
-
-  console.log(id);
-
-  const [posts, setPosts] = useState([]);
-  const [image, setImage] = useState([]);
-
-  console.log(posts['title']);
-  console.log(posts['content']);
-  console.log(posts['updatedAt']);
-  console.log(image['url']);
-
-  // 無限ループを回避する
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get(
-          `https://y-ohmori-portfolio.microcms.io/api/v1/blog/${id}`,
-          { headers: { 'X-API-KEY': process.env.MKEY } }
-        );
-        setPosts(res.data);
-        setImage(res.data.image);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [id]);
-
-  useEffect(() => {
-    // scriptを読み込み
-    const script = document.createElement('script');
-    script.src = 'https://platform.twitter.com/widgets.js';
-    document.body.appendChild(script);
-    // アンマウント時に一応scriptタグを消しておく
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  if (!posts['content']) {
-    return (
-      <Layout pageName="Article">
-        <div style={{ marginBottom: '20px' }}>
-          <Grid container alignItems="center" justify="center">
-            <Grid item sm={10}>
-              <Paper elevation={0} square>
-                <div style={{ textAlign: 'center', padding: 30 }}>
-                  <CircularProgress />
-                </div>
-              </Paper>
-            </Grid>
-          </Grid>
-        </div>
-      </Layout>
-    );
-  }
   return (
     <>
+      <Head>
+        <title>{title} | Article</title>
+        <link rel="icon" href="/favicon.ico" />
+
+        <meta property="og:title" content={`Blog | ${title}`} />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={process.env.baseUrl + '/blog/' + postId}
+        />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:site_name" content="Portforio" />
+        <meta property="og:description" content={content} />
+        {/* Twitter設定 */}
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
       <Layout pageName="Article">
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
@@ -129,14 +98,14 @@ const blogDetail: React.FC = () => {
                   variant="h4"
                   color="textPrimary"
                   align="center">
-                  {posts['title']}
+                  {title}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   color="textSecondary"
                   align="center">
                   <EventIcon />
-                  {posts['updatedAt']}
+                  {updatedAt}
                 </Typography>
               </div>
 
@@ -144,8 +113,8 @@ const blogDetail: React.FC = () => {
                 <div style={{ textAlign: 'center' }}>
                   <CardMedia
                     style={{ height: imageHeight }}
-                    image={image['url']}
-                    title={posts['title']}
+                    image={imageUrl}
+                    title={title}
                   />
                 </div>
                 <div
@@ -155,7 +124,7 @@ const blogDetail: React.FC = () => {
                     paddingRight: 15,
                   }}>
                   <Highlight innerHTML={true}>
-                    {markedOption(posts['content'], {
+                    {markedOption(content, {
                       renderer: markedRender(),
                     })}
                   </Highlight>
@@ -170,6 +139,42 @@ const blogDetail: React.FC = () => {
       </Layout>
     </>
   );
-};
+}
+
+export async function getServerSideProps(context) {
+  const id = context.query.id;
+
+  const res = await fetch(
+    `https://y-ohmori-portfolio.microcms.io/api/v1/blog/${id}`,
+    {
+      headers: {
+        'X-API-KEY': process.env.MKEY,
+      },
+    }
+  );
+
+  const json = await res.json();
+
+  const D = new Date(json.updatedAt);
+  const y = D.getFullYear();
+  const month = D.getMonth() + 1;
+  const d = D.getDate();
+  const h = D.getHours();
+  const min = D.getMinutes();
+
+  const updatedAt = `${zeroPadding(y, 4)}年 ${zeroPadding(
+    month,
+    2
+  )}月${zeroPadding(d, 2)}日 ${zeroPadding(h, 2)}:${zeroPadding(min, 2)}`;
+  return {
+    props: {
+      postId: json.id,
+      title: json.title,
+      updatedAt: updatedAt,
+      content: json.content,
+      imageUrl: json.image.url,
+    },
+  };
+}
 
 export default blogDetail;

@@ -44,11 +44,6 @@ export function BlogSnsShareSide(props) {
   const [posts, setPosts] = useState([]);
   const [image, setImage] = useState([]);
 
-  console.log(posts['title']);
-  console.log(posts['content']);
-  console.log(posts['updatedAt']);
-  console.log(image['url']);
-
   // 無限ループを回避する
   useEffect(() => {
     (async () => {

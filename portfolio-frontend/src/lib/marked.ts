@@ -18,7 +18,8 @@ export const markedRender = function () {
     <style>
     h${level} {
         padding: 1rem 2rem;
-        border-left: 4px solid #000080;
+        border-left: 7px solid #000080;
+        background-color: #EEEEEE;
       }
     </style>
     <h${level} class="author" href="#${escapedText}">
