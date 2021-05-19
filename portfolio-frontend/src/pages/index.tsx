@@ -32,8 +32,11 @@ import Image from 'next/image';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import EmailIcon from '@material-ui/icons/Email';
+import LinkIcon from '@material-ui/icons/Link';
+
 import axios from 'axios';
 import OGPHead from '../components/OGPHead';
+import deteformat from '../lib/deteformat';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +52,24 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: 10,
       marginRight: 10,
       fontSize: 30,
+    },
+    box: {
+      position: 'relative',
+    },
+    boxtext: {
+      position: 'absolute',
+      bottom: 0,
+      right: 17,
+      paddingTop: 3,
+      paddingBottom: 3,
+      paddingLeft: 13,
+      paddingRight: 13,
+      backgroundColor: 'rgba(219, 219, 219, 0.899)',
+      color: 'rgb(0, 0, 0)',
+      fontSize: 'medium',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 'small',
+      },
     },
   })
 );
@@ -116,10 +137,34 @@ function About() {
 }
 
 function Works(props) {
+  const classes = useStyles();
+  const [posts, setPosts] = useState([]);
+
+  console.log(posts);
+  // 無限ループを回避する
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(
+          'https://y-ohmori-portfolio.microcms.io/api/v1/work',
+          { headers: { 'X-API-KEY': process.env.MKEY } }
+        );
+        setPosts(res.data.contents);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
   return (
     <Grid item xs={props.carouselWidth}>
       <Link href={'/works'} underline="none" color="textPrimary">
-        <h2 style={{ textAlign: 'center' }}>Works</h2>
+        <h2
+          style={{
+            textAlign: 'center',
+            background: 'linear-gradient(transparent 90%, #1976D2 0%)',
+          }}>
+          Works
+        </h2>
       </Link>
       <Carousel
         next={() => {
@@ -132,14 +177,22 @@ function Works(props) {
         interval={3500}
         timeout={1000}
         navButtonsAlwaysVisible={false}>
-        {workData.slice(0, props.carouselNumber).map((item, i) => (
-          <a href={item.url}>
+        {posts.slice(0, props.carouselNumber).map((item, i) => (
+          <a href={item.url} target="_blank" rel="noopener noreferrer">
             <Paper elevation={3} key={i}>
-              <CardMedia
-                style={{ height: props.carouselHeight }}
-                image={item.img}
-                title={item.title}
-              />
+              <div className={classes.box}>
+                <CardMedia
+                  style={{ height: props.carouselHeight }}
+                  image={item.image.url}
+                  title={item.title}
+                />
+                <p className={classes.boxtext}>
+                  {item.title}{' '}
+                  <LinkIcon
+                    style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+                  />
+                </p>
+              </div>
             </Paper>
           </a>
         ))}
@@ -177,7 +230,13 @@ function Blog(props) {
       <OGPHead pageName={'TOP'} />
       <Grid item xs={props.carouselWidth}>
         <Link href={'/blog'} underline="none" color="textPrimary">
-          <h2 style={{ textAlign: 'center' }}>Blog</h2>
+          <h2
+            style={{
+              textAlign: 'center',
+              background: 'linear-gradient(transparent 90%, #1976D2 0%)',
+            }}>
+            Blog
+          </h2>
         </Link>
         <Carousel
           next={() => {
@@ -203,7 +262,7 @@ function Blog(props) {
                     {item.title}
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
-                    {item.createdAt}
+                    {deteformat(item.updatedAt)}
                   </Typography>
                 </div>
               </Paper>
