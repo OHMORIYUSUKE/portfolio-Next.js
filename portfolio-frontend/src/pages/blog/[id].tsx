@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import {
   Paper,
@@ -17,6 +17,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  CircularProgress,
 } from '@material-ui/core';
 import EventIcon from '@material-ui/icons/Event';
 
@@ -33,6 +34,8 @@ import Layout from '../../layout/layout';
 import Footer from '../../components/Footer';
 import BlogSnsShareSide from '../../components/BlogSnsShareSide';
 import BlogSnsShareBottom from '../../components/BlogSnsShareBottom';
+import axios from 'axios';
+import dynamic from 'next/dynamic';
 
 //markedのoptionを設定
 marked.setOptions({
@@ -42,12 +45,48 @@ marked.setOptions({
 });
 
 const blogDetail: React.FC = () => {
+  const BlogSnsShareBottom = dynamic(() =>
+    import('../../components/BlogSnsShareBottom').then(
+      (mod) => mod.BlogSnsShareBottom
+    )
+  );
+  const BlogSnsShareSide = dynamic(() =>
+    import('../../components/BlogSnsShareSide').then(
+      (mod) => mod.BlogSnsShareSide
+    )
+  );
   const router = useRouter();
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const imageHeight = isXsSm ? 180 : 250;
 
   const id = router.query.id;
+
+  console.log(id);
+
+  const [posts, setPosts] = useState([]);
+  const [image, setImage] = useState([]);
+
+  console.log(posts['title']);
+  console.log(posts['content']);
+  console.log(posts['updatedAt']);
+  console.log(image['url']);
+
+  // 無限ループを回避する
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(
+          `https://y-ohmori-portfolio.microcms.io/api/v1/blog/${id}`,
+          { headers: { 'X-API-KEY': process.env.MKEY } }
+        );
+        setPosts(res.data);
+        setImage(res.data.image);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [id]);
 
   useEffect(() => {
     // scriptを読み込み
@@ -59,74 +98,70 @@ const blogDetail: React.FC = () => {
       document.body.removeChild(script);
     };
   }, []);
+
+  if (!posts['content']) {
+    return (
+      <Layout pageName="Article">
+        <div style={{ marginBottom: '20px' }}>
+          <Grid container alignItems="center" justify="center">
+            <Grid item sm={10}>
+              <Paper elevation={0} square>
+                <div style={{ textAlign: 'center', padding: 30 }}>
+                  <CircularProgress />
+                </div>
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
+      </Layout>
+    );
+  }
   return (
     <>
       <Layout pageName="Article">
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
             <Grid item sm={10}>
-              {blogData.map((tile, i) => {
-                return Number(tile.id) == Number(id) ? (
-                  <>
-                    <Head>
-                      <title>Blog</title>
-                      <link rel="icon" href="/favicon.ico" />
-                      <meta property="og:title" content="Portforio" />
-                      <meta property="og:type" content="website" />
-                      <meta
-                        property="og:url"
-                        content={process.env.baseUrl + '/blog/' + tile.id}
-                      />
-                      <meta property="og:image" content={tile.img} />
-                      <meta property="og:site_name" content="Portforio" />
-                      <meta property="og:description" content={tile.title} />
-                      {/* Twitter設定 */}
-                      <meta name="twitter:card" content="summary_large_image" />
-                    </Head>
-                    <div style={{ display: 'block' }} key={i}>
-                      <Typography
-                        component="h4"
-                        variant="h4"
-                        color="textPrimary"
-                        align="center">
-                        {tile.title}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        color="textSecondary"
-                        align="center">
-                        <EventIcon />
-                        {tile.createdAt}
-                      </Typography>
-                    </div>
-                    <Paper elevation={0} square>
-                      <div style={{ textAlign: 'center' }}>
-                        <CardMedia
-                          style={{ height: imageHeight }}
-                          image={tile.img}
-                          title={tile.title}
-                        />
-                      </div>
-                      <div
-                        style={{
-                          paddingBottom: 3,
-                          paddingLeft: 15,
-                          paddingRight: 15,
-                        }}>
-                        <Highlight innerHTML={true}>
-                          {markedOption(tile.content, {
-                            renderer: markedRender(),
-                          })}
-                        </Highlight>
-                        <BlogSnsShareBottom title={tile.title} />
-                      </div>
-                    </Paper>
-                    <BlogSnsShareSide title={tile.title} />
-                  </>
-                ) : (
-                  <></>
-                );
-              })}
+              <div style={{ display: 'block' }}>
+                <Typography
+                  component="h4"
+                  variant="h4"
+                  color="textPrimary"
+                  align="center">
+                  {posts['title']}
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="textSecondary"
+                  align="center">
+                  <EventIcon />
+                  {posts['updatedAt']}
+                </Typography>
+              </div>
+
+              <Paper elevation={0} square>
+                <div style={{ textAlign: 'center' }}>
+                  <CardMedia
+                    style={{ height: imageHeight }}
+                    image={image['url']}
+                    title={posts['title']}
+                  />
+                </div>
+                <div
+                  style={{
+                    paddingBottom: 3,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                  }}>
+                  <Highlight innerHTML={true}>
+                    {markedOption(posts['content'], {
+                      renderer: markedRender(),
+                    })}
+                  </Highlight>
+                  <BlogSnsShareBottom />
+                </div>
+              </Paper>
+              <BlogSnsShareSide />
             </Grid>
           </Grid>
         </div>

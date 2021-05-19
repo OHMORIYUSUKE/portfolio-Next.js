@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import Layout from '../layout/layout';
@@ -19,6 +19,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Footer from '../components/Footer';
 import { ListSubheader } from '@material-ui/core';
+
+import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,6 +45,24 @@ const blog: React.FC = () => {
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const cardsPerRow = isXsSm ? 1 : 3;
 
+  const [posts, setPosts] = useState([]);
+
+  console.log(posts);
+  // 無限ループを回避する
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(
+          'https://y-ohmori-portfolio.microcms.io/api/v1/blog',
+          { headers: { 'X-API-KEY': process.env.MKEY } }
+        );
+        setPosts(res.data.contents);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <Head>
@@ -55,12 +75,12 @@ const blog: React.FC = () => {
             cols={cardsPerRow}
             cellHeight={180}
             className={classes.gridList}>
-            {blogData.map((tile, i) => (
+            {posts.map((tile, i) => (
               <GridListTile key={i}>
-                <img src={tile.img} alt={tile.title} />
+                <img src={tile.image.url} alt={tile.title} />
                 <GridListTileBar
                   title={tile.title}
-                  subtitle={<span>{tile.createdAt}</span>}
+                  subtitle={<span>{tile.created}</span>}
                   actionIcon={
                     <IconButton
                       href={'/blog/' + tile.id}
