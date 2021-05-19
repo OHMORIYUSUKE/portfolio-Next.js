@@ -34,6 +34,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import EmailIcon from '@material-ui/icons/Email';
 import axios from 'axios';
 import OGPHead from '../components/OGPHead';
+import deteformat from '../lib/deteformat';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -203,7 +204,7 @@ function Blog(props) {
                     {item.title}
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
-                    {item.createdAt}
+                    {deteformat(item.updatedAt)}
                   </Typography>
                 </div>
               </Paper>

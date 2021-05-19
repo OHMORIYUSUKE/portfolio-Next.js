@@ -39,6 +39,7 @@ import dynamic from 'next/dynamic';
 import OGPHead from '../../components/OGPHead';
 import fetch from 'node-fetch';
 import zeroPadding from '../../lib/zeroPadding';
+import deteformat from '../../lib/deteformat';
 
 //markedのoptionを設定
 marked.setOptions({
@@ -103,8 +104,9 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                 <Typography
                   variant="subtitle1"
                   color="textSecondary"
-                  align="center">
-                  <EventIcon />
+                  align="center"
+                  style={{marginBottom:7,marginTop:7}}>
+                  <EventIcon style={{display: 'inline-flex',verticalAlign: 'middle'}} />
                   {updatedAt}
                 </Typography>
               </div>
@@ -155,17 +157,8 @@ export async function getServerSideProps(context) {
 
   const json = await res.json();
 
-  const D = new Date(json.updatedAt);
-  const y = D.getFullYear();
-  const month = D.getMonth() + 1;
-  const d = D.getDate();
-  const h = D.getHours();
-  const min = D.getMinutes();
+  const updatedAt = deteformat(json.updatedAt);
 
-  const updatedAt = `${zeroPadding(y, 4)}年 ${zeroPadding(
-    month,
-    2
-  )}月${zeroPadding(d, 2)}日 ${zeroPadding(h, 2)}:${zeroPadding(min, 2)}`;
   return {
     props: {
       postId: json.id,
