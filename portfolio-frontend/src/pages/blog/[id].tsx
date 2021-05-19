@@ -36,6 +36,7 @@ import BlogSnsShareSide from '../../components/BlogSnsShareSide';
 import BlogSnsShareBottom from '../../components/BlogSnsShareBottom';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import OGPHead from '../../components/OGPHead';
 
 //markedのoptionを設定
 marked.setOptions({

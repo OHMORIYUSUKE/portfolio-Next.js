@@ -21,6 +21,7 @@ import Footer from '../components/Footer';
 import { ListSubheader } from '@material-ui/core';
 
 import axios from 'axios';
+import OGPHead from '../components/OGPHead';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,10 +66,7 @@ const blog: React.FC = () => {
 
   return (
     <>
-      <Head>
-        <title>Blog</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <OGPHead pageName={'Blog'} />
       <Layout pageName="Blog">
         <div className={classes.root}>
           <GridList
