@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: 'linear-gradient(transparent 97%, #1976D2 0%)',
       marginBottom: 20,
       padding: '0.4rem 2rem',
-      borderLeft: '6px solid #1976D2',
+      borderLeft: '8px solid #1976D2',
     },
   })
 );
