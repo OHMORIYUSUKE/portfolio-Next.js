@@ -72,7 +72,7 @@ function Web(props) {
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const widthSkelton = isXsSm ? 325:290;
+  const widthSkelton = isXsSm ? 325 : 290;
 
   if (posts.length === 0) {
     return (
@@ -80,15 +80,15 @@ function Web(props) {
         <div className={classes.root}>
           {[...Array(3)].map((_, i) => (
             <div key={i}>
-            <Skeleton
-              width={widthSkelton}
-              variant="rect"
-              height={180}
-              animation="wave"
-            />
-            <Skeleton animation="wave" width={widthSkelton} />
-            <Skeleton animation="wave" width={widthSkelton-60} />
-            <Skeleton animation="wave" width={widthSkelton-100} />
+              <Skeleton
+                width={widthSkelton}
+                variant="rect"
+                height={180}
+                animation="wave"
+              />
+              <Skeleton animation="wave" width={widthSkelton} />
+              <Skeleton animation="wave" width={widthSkelton - 60} />
+              <Skeleton animation="wave" width={widthSkelton - 100} />
             </div>
           ))}
         </div>
