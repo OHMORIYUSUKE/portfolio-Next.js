@@ -9,7 +9,7 @@ const OGPHead: React.FC<Props> = (props) => {
   return (
     <>
       <Head>
-        <title>Portfolio</title>
+        <title>{`Portforio | ${props.pageName}`}</title>
         <link rel="icon" href="/favicon.ico" />
 
         <meta property="og:title" content={`Portfolio | ${props.pageName}`} />

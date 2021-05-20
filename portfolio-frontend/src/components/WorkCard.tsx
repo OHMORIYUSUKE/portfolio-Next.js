@@ -136,7 +136,7 @@ const WorkCard: React.FC<Props> = (props) => {
             href={props.url}
             target="_blank"
             rel="noopener noreferrer">
-            {props.flag} <ChevronRightIcon />
+            {props.flag}へ <ChevronRightIcon />
           </Button>
         </CardActions>
       </Card>
@@ -166,7 +166,7 @@ const WorkCard: React.FC<Props> = (props) => {
             href={props.url}
             target="_blank"
             rel="noopener noreferrer">
-            {props.flag} <ChevronRightIcon />
+            {props.flag}へ <ChevronRightIcon />
           </Button>
         </DialogActions>
       </Dialog>
