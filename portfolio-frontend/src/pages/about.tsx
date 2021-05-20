@@ -20,6 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '100%',
       },
     },
+    anchor: {
+      display: 'block',
+      paddingTop: '90px',
+      marginTop: '-90px',
+    },
   })
 );
 
@@ -30,16 +35,16 @@ const about: React.FC = () => {
       <OGPHead pageName={'About'} />
       <Layout pageName="About">
         <Container className={classes.root}>
-          <a id="name"></a>
+          <a id="name" className={classes.anchor}></a>
           <h2>プロフィール</h2>
           <AboutName />
-          <a id="skill"></a>
+          <a id="skill" className={classes.anchor}></a>
           <h2>スキル</h2>
           <AboutSkill />
-          <a id="events"></a>
+          <a id="events" className={classes.anchor}></a>
           <h2>イベント</h2>
           <AboutEvents />
-          <a id="links"></a>
+          <a id="links" className={classes.anchor}></a>
           <h2>リンク</h2>
           <AboutLinks />
         </Container>

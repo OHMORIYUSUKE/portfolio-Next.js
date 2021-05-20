@@ -74,7 +74,7 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
   return (
     <>
       <Head>
-        <title>{title} | Article</title>
+        <title>{title} | Blog</title>
         <link rel="icon" href="/favicon.ico" />
 
         <meta property="og:title" content={`Blog | ${title}`} />
@@ -89,7 +89,7 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
         {/* Twitter設定 */}
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Layout pageName="Article">
+      <Layout pageName={title}>
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
             <Grid item sm={10}>

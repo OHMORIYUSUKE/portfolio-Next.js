@@ -33,7 +33,7 @@ export function SideMenuWorks(): JSX.Element {
       </ListItem>
       {/* ---プルダウン--- */}
       <Collapse in={expanded}>
-        <Link href={'/works/#programming'} underline="none" color="textPrimary">
+        <Link href={'/works#web'} underline="none" color="textPrimary">
           <ListItem button>
             <ListItemIcon>
               <ChevronRightIcon />
@@ -41,7 +41,7 @@ export function SideMenuWorks(): JSX.Element {
             <ListItemText primary={'Web'} />
           </ListItem>
         </Link>
-        <Link href={'/works/#programming'} underline="none" color="textPrimary">
+        <Link href={'/works#blender'} underline="none" color="textPrimary">
           <ListItem button>
             <ListItemIcon>
               <ChevronRightIcon />
@@ -49,20 +49,12 @@ export function SideMenuWorks(): JSX.Element {
             <ListItemText primary={'Blender'} />
           </ListItem>
         </Link>
-        <Link href={'/works/#programming'} underline="none" color="textPrimary">
+        <Link href={'/works#unity'} underline="none" color="textPrimary">
           <ListItem button>
             <ListItemIcon>
               <ChevronRightIcon />
             </ListItemIcon>
             <ListItemText primary={'Unity'} />
-          </ListItem>
-        </Link>
-        <Link href={'/works/#other'} underline="none" color="textPrimary">
-          <ListItem button>
-            <ListItemIcon>
-              <ChevronRightIcon />
-            </ListItemIcon>
-            <ListItemText primary={'その他'} />
           </ListItem>
         </Link>
       </Collapse>
