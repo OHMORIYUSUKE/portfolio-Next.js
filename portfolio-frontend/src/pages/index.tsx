@@ -282,7 +282,7 @@ const Home: React.FC = () => {
   const carouselNumber = 5;
   return (
     <>
-      <OGPHead pageName={'Top'}/>
+      <OGPHead pageName={'Top'} />
       <Layout pageName="Top">
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
