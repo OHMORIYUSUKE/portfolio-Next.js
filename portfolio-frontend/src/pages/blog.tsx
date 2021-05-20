@@ -19,6 +19,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Footer from '../components/Footer';
 import { ListSubheader } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 import axios from 'axios';
 import OGPHead from '../components/OGPHead';
@@ -64,17 +65,29 @@ const blog: React.FC = () => {
     })();
   }, []);
 
-  console.log(posts.length);
-
   if (posts.length === 0) {
     return (
       <>
-        <h1>--------------ロード中----------</h1>
-        <h1>--------------ロード中----------</h1>
-        <h1>--------------ロード中----------</h1>
-        <h1>--------------ロード中----------</h1>
-        <h1>--------------ロード中----------</h1>
-        <h1>--------------ロード中----------</h1>
+        <Layout pageName="Blog">
+          <div className={classes.root}>
+            <GridList
+              cols={cardsPerRow}
+              cellHeight={180}
+              className={classes.gridList}>
+              {[...Array(12)].map((_, i) => (
+                <GridListTile key={i}>
+                  <Skeleton
+                    variant="rect"
+                    width={300}
+                    height={180}
+                    animation="wave"
+                  />
+                </GridListTile>
+              ))}
+            </GridList>
+          </div>
+          <Footer />
+        </Layout>
       </>
     );
   }

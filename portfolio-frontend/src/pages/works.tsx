@@ -9,11 +9,15 @@ import {
   makeStyles,
   Theme,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core';
 import { workData } from '../testData/workData';
 import WorkCard from '../components/WorkCard';
 import axios from 'axios';
 import OGPHead from '../components/OGPHead';
+
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'space-around',
       marginBottom: 20,
+      [theme.breakpoints.down('sm')]: {
+        display: 'block',
+      },
     },
     gridList: {
       width: '100%',
@@ -47,7 +54,6 @@ function Web(props) {
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
 
-  console.log(posts);
   // 無限ループを回避する
   useEffect(() => {
     (async () => {
@@ -63,12 +69,29 @@ function Web(props) {
     })();
   }, []);
 
+  const theme = useTheme();
+  const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const widthSkelton = isXsSm ? 325:290;
+
   if (posts.length === 0) {
     return (
       <>
-        <h1>--------------ロード中----------</h1>
-        <h1>--------------ロード中----------</h1>
-        <h1>--------------ロード中----------</h1>
+        <div className={classes.root}>
+          {[...Array(3)].map((_, i) => (
+            <div key={i}>
+            <Skeleton
+              width={widthSkelton}
+              variant="rect"
+              height={180}
+              animation="wave"
+            />
+            <Skeleton animation="wave" width={widthSkelton} />
+            <Skeleton animation="wave" width={widthSkelton-60} />
+            <Skeleton animation="wave" width={widthSkelton-100} />
+            </div>
+          ))}
+        </div>
       </>
     );
   }
