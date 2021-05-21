@@ -18,11 +18,12 @@ import { blogData } from '../testData/blogData';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Footer from '../components/Footer';
-import { ListSubheader } from '@material-ui/core';
+import { CardMedia, Link, ListSubheader } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import axios from 'axios';
 import OGPHead from '../components/OGPHead';
+import deteformat from '../lib/deteformat';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -104,18 +105,17 @@ const blog: React.FC = () => {
             {posts.map((tile, i) => (
               <GridListTile key={i}>
                 <img src={tile.image.url} alt={tile.title} />
-                <GridListTileBar
-                  title={tile.title}
-                  subtitle={<span>{tile.created}</span>}
-                  actionIcon={
-                    <IconButton
-                      href={'/blog/' + tile.id}
-                      aria-label={`info about ${tile.title}`}
-                      className={classes.icon}>
-                      <ChevronRightIcon />
-                    </IconButton>
-                  }
-                />
+                <a href={`blog/${tile.id}`}>
+                  <GridListTileBar
+                    title={tile.title}
+                    subtitle={<span>{deteformat(tile.updatedAt)}</span>}
+                    actionIcon={
+                      <IconButton className={classes.icon}>
+                        <ChevronRightIcon />
+                      </IconButton>
+                    }
+                  />
+                </a>
               </GridListTile>
             ))}
           </GridList>

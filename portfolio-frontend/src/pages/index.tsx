@@ -91,12 +91,14 @@ function About() {
         style={{ borderRadius: '13px', width: '100%' }}>
         <Box p={1}>
           <div className={classes.imageLocation}>
-            <Image
-              src="/images/profile.jpg"
-              width={200}
-              height={200}
-              className={classes.image}
-            />
+            <Link href={'/about'}>
+              <Image
+                src="/images/profile.jpg"
+                width={200}
+                height={200}
+                className={classes.image}
+              />
+            </Link>
           </div>
         </Box>
         <Box p={1}>

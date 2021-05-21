@@ -1,11 +1,35 @@
-import { Link, ListItemText } from '@material-ui/core';
+import {
+  createStyles,
+  IconButton,
+  Link,
+  ListItemText,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
 import { Collapse } from '@material-ui/core';
 import { ListItem, ListItemIcon } from '@material-ui/core';
 import React from 'react';
+import clsx from 'clsx';
 
 import FaceIcon from '@material-ui/icons/Face';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(-180deg)',
+    },
+  })
+);
 
 export function SideMenuAbout(): JSX.Element {
   let open = localStorage.getItem('SideMenuAbout');
@@ -15,6 +39,9 @@ export function SideMenuAbout(): JSX.Element {
   } else {
     opened = false;
   }
+
+  const classes = useStyles();
+
   const [expanded, setExpanded] = React.useState(opened);
   console.log(open);
 
@@ -30,6 +57,18 @@ export function SideMenuAbout(): JSX.Element {
           <FaceIcon />
         </ListItemIcon>
         <ListItemText primary={'About'} />
+        <Link
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+          color="textSecondary">
+          <ExpandMoreIcon
+            style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+          />
+        </Link>
       </ListItem>
       {/* ---プルダウン--- */}
       <Collapse in={expanded}>
