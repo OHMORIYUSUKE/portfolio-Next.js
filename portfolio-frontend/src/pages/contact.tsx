@@ -127,8 +127,6 @@ const about: React.FC = () => {
         handleClickOpen();
       })
       .catch((error) => {
-        console.log('Error : ' + JSON.stringify(error.response));
-        console.log('Error msg : ' + error.response.data.message);
         window.alert('送信に失敗しました。');
       });
   }
