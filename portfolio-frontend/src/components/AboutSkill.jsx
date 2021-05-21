@@ -21,7 +21,7 @@ const BorderLinearProgress = withStyles((theme) =>
     },
     bar: {
       borderRadius: 5,
-      backgroundColor: props => props.lineColor,
+      backgroundColor: (props) => props.lineColor,
     },
   })
 )(LinearProgress);
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
 export default function AboutSkill() {
   const classes = useStyles();
-  
+
   return (
     <div className={classes.root}>
       {skillData.map((data, idx) => (

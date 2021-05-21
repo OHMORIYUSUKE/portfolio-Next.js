@@ -2,36 +2,36 @@ export const skillData = [
   {
     language: 'PHP',
     value: 70,
-    color: 'rgb(66,133,244)',
+    color: '#4F5D95',
   },
   {
     language: 'JavaScript',
-    value: 40,
-    color: 'rgb(234,67,53)',
-  },
-  {
-    language: 'TypeScript',
-    value: 1,
-    color: 'rgb(52,168,83)',
+    value: 60,
+    color: '#F1E05A',
   },
   {
     language: 'Java',
     value: 50,
-    color: 'rgb(251,188,5)',
+    color: '#B07219',
   },
   {
     language: 'C',
-    value: 50,
-    color: 'rgb(66,133,244)',
+    value: 60,
+    color: '#555555',
   },
   {
     language: 'Python',
     value: 50,
-    color: 'rgb(52,168,83)',
+    color: '#3572A5',
   },
   {
-    language: 'HTML,CSS',
-    value: 40,
-    color: 'rgb(234,67,53)',
+    language: 'HTML',
+    value: 60,
+    color: '#E34C26',
+  },
+  {
+    language: 'CSS',
+    value: 30,
+    color: '#563D7C',
   },
 ];
