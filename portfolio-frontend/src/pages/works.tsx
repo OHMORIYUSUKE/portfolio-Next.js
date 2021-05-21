@@ -79,11 +79,11 @@ function Web(props) {
       <>
         <div className={classes.root}>
           {[...Array(3)].map((_, i) => (
-            <div key={i}>
+            <div key={i} style={{ paddingTop: 30, paddingBottom: 30 }}>
               <Skeleton
                 width={widthSkelton}
                 variant="rect"
-                height={180}
+                height={230}
                 animation="wave"
               />
               <Skeleton animation="wave" width={widthSkelton} />
