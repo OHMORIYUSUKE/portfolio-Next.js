@@ -91,8 +91,6 @@ const about: React.FC = () => {
     ) as HTMLInputElement;
     const inputValueMail = inputElementMail.value;
 
-    //window.alert(inputValueName +'/'+inputValueMail+ '/'+ inputValueContent);
-
     if (
       inputValueName == '' ||
       inputValueContent == '' ||
