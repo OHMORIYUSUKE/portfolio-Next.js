@@ -4,11 +4,12 @@ import {
   createStyles,
   withStyles,
   Theme,
+  WithStyles,
 } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { skillData } from '../testData/skillData';
 
-const BorderLinearProgress = withStyles((theme: Theme) =>
+const BorderLinearProgress = withStyles((theme) =>
   createStyles({
     root: {
       height: 10,
@@ -20,7 +21,7 @@ const BorderLinearProgress = withStyles((theme: Theme) =>
     },
     bar: {
       borderRadius: 5,
-      backgroundColor: '#1a90ff',
+      backgroundColor: props => props.lineColor,
     },
   })
 )(LinearProgress);
@@ -33,13 +34,17 @@ const useStyles = makeStyles({
 
 export default function AboutSkill() {
   const classes = useStyles();
-
+  
   return (
     <div className={classes.root}>
       {skillData.map((data, idx) => (
         <>
           <p key={idx}>{data.language}</p>
-          <BorderLinearProgress variant="determinate" value={data.value} />
+          <BorderLinearProgress
+            variant="determinate"
+            value={data.value}
+            lineColor={data.color}
+          />
         </>
       ))}
     </div>

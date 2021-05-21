@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: '90px',
       marginTop: '-90px',
     },
+    title: {},
   })
 );
 
@@ -36,16 +37,16 @@ const about: React.FC = () => {
       <Layout pageName="About">
         <Container className={classes.root}>
           <a id="name" className={classes.anchor}></a>
-          <h2>プロフィール</h2>
+          <h2 className={classes.title}>プロフィール</h2>
           <AboutName />
           <a id="skill" className={classes.anchor}></a>
-          <h2>スキル</h2>
+          <h2 className={classes.title}>スキル</h2>
           <AboutSkill />
           <a id="events" className={classes.anchor}></a>
-          <h2>イベント</h2>
+          <h2 className={classes.title}>イベント</h2>
           <AboutEvents />
           <a id="links" className={classes.anchor}></a>
-          <h2>リンク</h2>
+          <h2 className={classes.title}>リンク</h2>
           <AboutLinks />
         </Container>
         <Footer />
