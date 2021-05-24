@@ -1,4 +1,5 @@
 import marked from 'marked';
+import crypto from 'crypto';
 
 export const markedOption = marked.setOptions({
   gfm: true,
@@ -13,7 +14,11 @@ export const markedRender = function () {
 
   //renderer.headingでh1,h2,h3...要素を取得し、クラスを付与する。
   renderer.heading = function (text, level) {
-    const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+    // ランダム文字列を生成
+    const S="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    const N=16
+    const random = Array.from(crypto.randomFillSync(new Uint8Array(N))).map((n:number)=>S[n%S.length]).join('')
+    //const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
     return `
     <style>
     h${level} {
@@ -22,7 +27,7 @@ export const markedRender = function () {
         background-color: #EEEEEE;
       }
     </style>
-    <h${level} class="author" href="#${escapedText}">
+    <h${level} class="author" href="#${random}">
     ${text}
     </h${level}>
     `;

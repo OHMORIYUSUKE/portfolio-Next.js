@@ -1,11 +1,5 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-
 import Layout from '../layout/layout';
-import AboutEvents from '../components/AboutEvents';
-import AboutSkill from '../components/AboutSkill';
-import AboutName from '../components/AboutName';
-import AboutLinks from '../components/AboutLinks';
 import Footer from '../components/Footer';
 import {
   Button,
@@ -18,13 +12,11 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
-import Head from 'next/head';
 import OGPHead from '../components/OGPHead';
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Image from 'next/image';
 import Router from 'next/router';
@@ -108,7 +100,7 @@ const about: React.FC = () => {
 
     axios
       .post(
-        'https://y-ohmori-portfolio.microcms.io/api/v1/contact', 
+        'https://y-ohmori-portfolio.microcms.io/api/v1/contact',
         {
           name: inputValueName,
           content: inputValueContent,
