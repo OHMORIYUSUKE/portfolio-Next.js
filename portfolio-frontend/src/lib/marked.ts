@@ -15,9 +15,11 @@ export const markedRender = function () {
   //renderer.headingでh1,h2,h3...要素を取得し、クラスを付与する。
   renderer.heading = function (text, level) {
     // ランダム文字列を生成
-    const S="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    const N=16
-    const random = Array.from(crypto.randomFillSync(new Uint8Array(N))).map((n:number)=>S[n%S.length]).join('')
+    const S = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const N = 16;
+    const random = Array.from(crypto.randomFillSync(new Uint8Array(N)))
+      .map((n: number) => S[n % S.length])
+      .join('');
     //const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
     return `
     <style>
@@ -27,7 +29,8 @@ export const markedRender = function () {
         background-color: #EEEEEE;
       }
     </style>
-    <h${level} class="author" href="#${random}">
+    <a id="${random}"></a>
+    <h${level} id="${random}">
     ${text}
     </h${level}>
     `;
@@ -72,24 +75,6 @@ export const markedRender = function () {
   };
   renderer.listitem = function (text) {
     return `
-    <style>
-    ol {
-        counter-reset: li; 
-        list-style: none; 
-      }
-      
-      li {
-        line-height: 1.8;
-      }
-      
-      ol > li::before {
-        margin-right: 0.25rem;
-        content:counter(li) ".";
-        counter-increment: li;
-        font-size: 24px;
-        font-weight: lighter;
-      }
-    </style>
     <li>${text}</li>
     `;
   };

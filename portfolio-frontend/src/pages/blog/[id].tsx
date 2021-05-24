@@ -41,6 +41,8 @@ import fetch from 'node-fetch';
 import zeroPadding from '../../lib/zeroPadding';
 import deteformat from '../../lib/deteformat';
 
+import cheerio from 'cheerio';
+
 //markedのoptionを設定
 marked.setOptions({
   gfm: true,
@@ -56,7 +58,23 @@ type Props = {
   imageUrl: string;
 };
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    contentsTitles: {
+      marginTop: 15,
+      // backgroundColor: '#EEFFFF',
+      border: 'dashed 2px #668ad8' /*破線*/,
+      borderRadius: 20,
+    },
+    list: {
+      listStyleType: 'circle',
+    },
+  })
+);
+
 function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
+  const classes = useStyles();
+
   const BlogSnsShareBottom = dynamic(() =>
     import('../../components/BlogSnsShareBottom').then(
       (mod) => mod.BlogSnsShareBottom
@@ -67,6 +85,35 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
       (mod) => mod.BlogSnsShareSide
     )
   );
+
+  let HTMLcontent = markedOption(content, {
+    renderer: markedRender(),
+  });
+
+  HTMLcontent = `
+  <!DOCTYPE html>
+    <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+      </head>
+      <body>
+          ${HTMLcontent}
+      </body>
+    </html>
+  `;
+
+  // HTMLからhタグを取得
+  const $ = cheerio.load(HTMLcontent);
+  const headings = $('h1, h2, h3').toArray();
+  const toc = headings.map((data) => ({
+    text: data.children[0],
+    id: data.attribs.id,
+    name: data.name,
+  }));
+
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const imageHeight = isXsSm ? 180 : 250;
@@ -127,11 +174,25 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                     paddingLeft: 15,
                     paddingRight: 15,
                   }}>
-                  <Highlight innerHTML={true}>
-                    {markedOption(content, {
-                      renderer: markedRender(),
-                    })}
-                  </Highlight>
+                  <Paper className={classes.contentsTitles} elevation={0}>
+                    <p
+                      style={{
+                        paddingLeft: 25,
+                        fontSize: 20,
+                        background:
+                          'linear-gradient(transparent 95%, #668ad8 0%)',
+                      }}>
+                      もくじ
+                    </p>
+                    <ol className={classes.list}>
+                      {toc.map((tile, i) => (
+                        <li>
+                          <a href={'#' + tile.id}>{tile.text['data']}</a>
+                        </li>
+                      ))}
+                    </ol>
+                  </Paper>
+                  <Highlight innerHTML={true}>{HTMLcontent}</Highlight>
                   <BlogSnsShareBottom />
                 </div>
               </Paper>
