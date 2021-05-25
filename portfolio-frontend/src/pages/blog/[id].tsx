@@ -60,6 +60,16 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    indexRoot: {
+      position: 'fixed',
+      right: '8px',
+      top: '15%',
+    },
+    indexPaper: {
+      borderLeft: 'thick solid #1976D2',
+      paddingTop: 2,
+      paddingBottom: 2,
+    },
     contentsTitles: {
       marginTop: 15,
       // backgroundColor: '#EEFFFF',
@@ -116,7 +126,9 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
 
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const imageHeight = isXsSm ? 180 : 250;
+  const imageHeight = isXsSm ? 220 : 250;
+
+  const bodySpaceLeft = isXsSm ? '0%' : '3%';
 
   return (
     <>
@@ -137,9 +149,9 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Layout pageName={title} space={0}>
-        <div style={{ marginBottom: '20px' }}>
-          <Grid container alignItems="center" justify="center">
-            <Grid item sm={10}>
+        <div style={{ marginBottom: '20px', marginLeft: bodySpaceLeft }}>
+          <Grid container alignItems="flex-start" justify="flex-start">
+            <Grid item sm={9}>
               <div style={{ display: 'block' }}>
                 <Typography
                   component="h4"
@@ -161,7 +173,7 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                 </Typography>
               </div>
               {/* コードのタグをレスポンシブにする */}
-              <Paper elevation={0} square style={{ maxWidth: 'calc(100vw)' }}>
+              <Paper elevation={0} square style={{ maxWidth: '100vw' }}>
                 <div style={{ textAlign: 'center' }}>
                   <CardMedia
                     style={{ height: imageHeight }}
@@ -197,6 +209,37 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                   <BlogSnsShareBottom />
                 </div>
               </Paper>
+              {isXsSm ? (
+                <></>
+              ) : (
+                <div className={classes.indexRoot}>
+                  <Paper elevation={0} className={classes.indexPaper}>
+                    <ol
+                      style={{
+                        listStyleType: 'circle',
+                        paddingInlineStart: 23,
+                      }}>
+                      {toc.map((tile, i) => (
+                        <li key={i}>
+                          <a href={'#' + tile.id}>
+                            {tile.text['data'].length > 18 ? (
+                              <>
+                                {tile.text['data'].slice(0, 18)}
+                                <br />
+                                {tile.text['data'].length > 35
+                                  ? tile.text['data'].slice(19, 35) + '...'
+                                  : tile.text['data'].slice(19, 35)}
+                              </>
+                            ) : (
+                              tile.text['data']
+                            )}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </Paper>
+                </div>
+              )}
               <BlogSnsShareSide />
             </Grid>
           </Grid>

@@ -189,7 +189,9 @@ function Works(props) {
                   title={item.title}
                 />
                 <p className={classes.boxtext}>
-                  {item.title}{' '}
+                  {item.title.length > 18
+                    ? item.title.slice(0, 18) + '...'
+                    : item.title}{' '}
                   <LinkIcon
                     style={{ display: 'inline-flex', verticalAlign: 'middle' }}
                   />
@@ -261,7 +263,9 @@ function Blog(props) {
                 />
                 <div style={{ margin: TitleSpace }}>
                   <Typography component={TextfontSize} variant={TextfontSize}>
-                    {item.title}
+                    {item.title.length > 11
+                      ? item.title.slice(0, 11) + '...'
+                      : item.title}
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
                     {deteformat(item.updatedAt)}

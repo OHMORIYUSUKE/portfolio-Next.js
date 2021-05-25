@@ -16,14 +16,14 @@ a {
 }
 .twitter-tweet {
   width: '90%';
-  margin-left: 11%;
+  margin-left: 8%;
 }
 .twitter-timeline {
   width: '90%';
-  margin-left: 25%;
+  margin-left: 22%;
 }
 iframe {
-  margin-left: 14%;
+  margin-left: 11%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -32,7 +32,7 @@ iframe {
   border-radius: 4px;
 }
 .scroll-table {
-  padding: 5px;
+  overflow-x: auto;
 }
 
 @media (max-width: 500px) {
@@ -47,13 +47,9 @@ iframe {
   iframe {
     margin-left: 0;
     border: none;
-    width: 79vw;
-    height: 20vh;
+    width: 100%;
   }
-
   .scroll-table {
-    padding: 5px;
-    width: 79vw;
     overflow-x: auto;
   }
 }
