@@ -50,12 +50,7 @@ iframe {
     width: 79vw;
     height: 20vh;
   }
-  .hljs {
-    padding: 15px;
-    border-radius: 4px;
-    width: 79vw;
-    overflow-x: auto;
-  }
+
   .scroll-table {
     padding: 5px;
     width: 79vw;

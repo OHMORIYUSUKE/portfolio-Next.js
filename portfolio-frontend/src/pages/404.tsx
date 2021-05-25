@@ -9,7 +9,7 @@ export default function Custom404() {
   return (
     <>
       <OGPHead pageName={'404 NotFound'} />
-      <Layout pageName="404 NotFound">
+      <Layout pageName="404 NotFound" space={3}>
         <div style={{ textAlign: 'center', marginBottom: 50 }}>
           <h1>ページが見つかりませんでした。</h1>
           <Image src="/images/404.png" width={300} height={300} />

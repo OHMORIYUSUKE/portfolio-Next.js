@@ -69,7 +69,7 @@ const blog: React.FC = () => {
   if (posts.length === 0) {
     return (
       <>
-        <Layout pageName="Blog">
+        <Layout pageName="Blog" space={3}>
           <div className={classes.root}>
             <GridList
               cols={cardsPerRow}
@@ -96,7 +96,7 @@ const blog: React.FC = () => {
   return (
     <>
       <OGPHead pageName={'Blog'} />
-      <Layout pageName="Blog">
+      <Layout pageName="Blog" space={3}>
         <div className={classes.root}>
           <GridList
             cols={cardsPerRow}

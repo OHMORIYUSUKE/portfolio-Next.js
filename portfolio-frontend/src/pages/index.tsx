@@ -285,7 +285,7 @@ const Home: React.FC = () => {
   return (
     <>
       <OGPHead pageName={'Top'} />
-      <Layout pageName="Top">
+      <Layout pageName="Top" space={3}>
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
             <About />

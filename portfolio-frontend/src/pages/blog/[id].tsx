@@ -136,7 +136,7 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
         {/* Twitter設定 */}
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Layout pageName={title}>
+      <Layout pageName={title} space={0}>
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
             <Grid item sm={10}>
@@ -145,7 +145,8 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                   component="h4"
                   variant="h4"
                   color="textPrimary"
-                  align="center">
+                  align="center"
+                  style={{ marginTop: '20px' }}>
                   {title}
                 </Typography>
                 <Typography
@@ -159,8 +160,8 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                   {updatedAt}
                 </Typography>
               </div>
-
-              <Paper elevation={0} square>
+              {/* コードのタグをレスポンシブにする */}
+              <Paper elevation={0} square style={{ maxWidth: 'calc(100vw)' }}>
                 <div style={{ textAlign: 'center' }}>
                   <CardMedia
                     style={{ height: imageHeight }}

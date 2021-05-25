@@ -125,7 +125,7 @@ const about: React.FC = () => {
   return (
     <>
       <OGPHead pageName={'Contact'} />
-      <Layout pageName="Contact">
+      <Layout pageName="Contact" space={3}>
         <Grid
           container
           alignItems="center"

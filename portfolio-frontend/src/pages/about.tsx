@@ -34,7 +34,7 @@ const about: React.FC = () => {
   return (
     <>
       <OGPHead pageName={'About'} />
-      <Layout pageName="About">
+      <Layout pageName="About" space={3}>
         <Container className={classes.root}>
           <a id="name" className={classes.anchor}></a>
           <h2 className={classes.title}>プロフィール</h2>
