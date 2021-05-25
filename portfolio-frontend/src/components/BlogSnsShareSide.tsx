@@ -5,7 +5,18 @@ import {
   withStyles,
   Theme,
 } from '@material-ui/core/styles';
-import { Paper, useMediaQuery, useTheme } from '@material-ui/core';
+import {
+  Button,
+  Collapse,
+  IconButton,
+  Link,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 import {
   TwitterShareButton,
   TwitterIcon,
@@ -20,12 +31,13 @@ import {
 } from 'react-share';
 import router from 'next/router';
 import axios from 'axios';
+import ShareIcon from '@material-ui/icons/Share';
 
 const useStyles = makeStyles({
   root: {
     position: 'fixed',
-    right: '16px',
-    bottom: '25%',
+    right: '2%',
+    bottom: '4%',
   },
   paper: {
     padding: '10px',
@@ -60,40 +72,53 @@ export function BlogSnsShareSide(props) {
     })();
   }, [id]);
 
+  const [expanded, setExpanded] = React.useState(false);
+  console.log(open);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+    const openOrClose = !expanded;
+  };
+
   return isXsSm ? (
     <></>
   ) : (
     <div className={classes.root}>
       <Paper elevation={3} className={classes.paper}>
-        <TwitterShareButton
-          title={posts['title']}
-          url={process.env.baseUrl + location.pathname}>
-          <TwitterIcon size={40} round />
-        </TwitterShareButton>
-        <br />
-        <FacebookShareButton
-          title={posts['title']}
-          url={process.env.baseUrl + location.pathname}>
-          <FacebookIcon size={40} round />
-        </FacebookShareButton>
-        <br />
-        <LineShareButton
-          title={posts['title']}
-          url={process.env.baseUrl + location.pathname}>
-          <LineIcon size={40} round />
-        </LineShareButton>
-        <br />
-        <HatenaShareButton
-          title={posts['title']}
-          url={process.env.baseUrl + location.pathname}>
-          <HatenaIcon size={40} round />
-        </HatenaShareButton>
-        <br />
-        <PocketShareButton
-          title={posts['title']}
-          url={process.env.baseUrl + location.pathname}>
-          <PocketIcon size={40} round />
-        </PocketShareButton>
+        <Collapse in={expanded}>
+          <TwitterShareButton
+            title={posts['title']}
+            url={process.env.baseUrl + location.pathname}>
+            <TwitterIcon size={40} round />
+          </TwitterShareButton>
+          <br />
+          <FacebookShareButton
+            title={posts['title']}
+            url={process.env.baseUrl + location.pathname}>
+            <FacebookIcon size={40} round />
+          </FacebookShareButton>
+          <br />
+          <LineShareButton
+            title={posts['title']}
+            url={process.env.baseUrl + location.pathname}>
+            <LineIcon size={40} round />
+          </LineShareButton>
+          <br />
+          <HatenaShareButton
+            title={posts['title']}
+            url={process.env.baseUrl + location.pathname}>
+            <HatenaIcon size={40} round />
+          </HatenaShareButton>
+          <br />
+          <PocketShareButton
+            title={posts['title']}
+            url={process.env.baseUrl + location.pathname}>
+            <PocketIcon size={40} round />
+          </PocketShareButton>
+        </Collapse>
+        <IconButton onClick={handleExpandClick} style={{ borderRadius: '50%' }}>
+          <ShareIcon fontSize="small" color="primary" />
+        </IconButton>
       </Paper>
     </div>
   );

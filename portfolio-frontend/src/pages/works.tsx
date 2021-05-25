@@ -122,7 +122,7 @@ const works: React.FC = () => {
   return (
     <>
       <OGPHead pageName={'Works'} />
-      <Layout pageName="Works">
+      <Layout pageName="Works" space={3}>
         <div style={{ marginBottom: '20px' }}>
           <a id="web" className={classes.anchor}></a>
           <Typography

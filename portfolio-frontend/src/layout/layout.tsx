@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
     },
   })
 );
@@ -65,6 +64,7 @@ interface Props {
    * You won't need it on your project.
    */
   window?: () => Window;
+  space: number;
 }
 
 export default function ResponsiveDrawer(props: Props) {
@@ -167,7 +167,9 @@ export default function ResponsiveDrawer(props: Props) {
             </Drawer>
           </Hidden>
         </nav>
-        <main className={classes.content}>
+        <main
+          className={classes.content}
+          style={{ padding: theme.spacing(props.space) }}>
           <div className={classes.toolbar} />
           <Typography paragraph>{props.children}</Typography>
         </main>
