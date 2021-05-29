@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme: Theme) =>
     buttonLink: {
       justifyContent: 'flex-end',
     },
+    media: {
+      height: 180,
+    },
   })
 );
 
@@ -116,6 +119,7 @@ const WorkCard: React.FC<Props> = (props) => {
             alt={props.title}
             image={props.img}
             title={props.title}
+            className={classes.media}
           />
           <CardContent>
             <Typography gutterBottom variant="h6" component="h2">

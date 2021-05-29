@@ -20,6 +20,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Image from 'next/image';
 import Router from 'next/router';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -132,7 +133,13 @@ const about: React.FC = () => {
           justify="center"
           className={classes.root}>
           <Grid item style={{ width: textAreaWidth }}>
-            <h2>お問い合わせ</h2>
+            <h2>
+              <EmojiPeopleIcon
+                fontSize="large"
+                style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+              />{' '}
+              お問い合わせ
+            </h2>
             <TextField
               id="textareaName"
               className={classes.name}

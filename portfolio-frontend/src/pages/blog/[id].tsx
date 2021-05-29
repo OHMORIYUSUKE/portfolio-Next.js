@@ -69,6 +69,8 @@ const useStyles = makeStyles((theme: Theme) =>
       borderLeft: 'thick solid #1976D2',
       paddingTop: 2,
       paddingBottom: 2,
+      maxWidth: 230,
+      minWidth: 230,
     },
     contentsTitles: {
       marginTop: 15,
@@ -221,19 +223,7 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                       }}>
                       {toc.map((tile, i) => (
                         <li key={i}>
-                          <a href={'#' + tile.id}>
-                            {tile.text['data'].length > 18 ? (
-                              <>
-                                {tile.text['data'].slice(0, 18)}
-                                <br />
-                                {tile.text['data'].length > 35
-                                  ? tile.text['data'].slice(19, 35) + '...'
-                                  : tile.text['data'].slice(19, 35)}
-                              </>
-                            ) : (
-                              tile.text['data']
-                            )}
-                          </a>
+                          <a href={'#' + tile.id}>{tile.text['data']}</a>
                         </li>
                       ))}
                     </ol>
