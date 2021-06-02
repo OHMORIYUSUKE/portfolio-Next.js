@@ -37,6 +37,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import axios from 'axios';
 import OGPHead from '../components/OGPHead';
 import deteformat from '../lib/deteformat';
+import Denkou from '../components/denkou';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -293,6 +294,7 @@ const Home: React.FC = () => {
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
             <About />
+            <Denkou />
             <Works
               carouselWidth={carouselWidth}
               carouselHeight={carouselHeight}
