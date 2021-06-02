@@ -105,6 +105,8 @@ function About() {
         <Box p={1}>
           <h2 style={{ textAlign: 'center' }}>大森裕介</h2>
 
+          <p style={{ textAlign: 'center' }}>天海春香のP</p>
+
           <div style={{ textAlign: 'center' }}>
             <Link
               href={'https://twitter.com/uutan1108'}
