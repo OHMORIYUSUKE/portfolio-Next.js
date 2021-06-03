@@ -297,7 +297,6 @@ const Home: React.FC = () => {
           <Grid container alignItems="center" justify="center">
             <About />
             <Denkou />
-            <br />
             <Works
               carouselWidth={carouselWidth}
               carouselHeight={carouselHeight}

@@ -19,6 +19,7 @@ import {
 import dynamic from 'next/dynamic';
 import SideMenuLinks from '../components/SideMenuLinks';
 import { Link } from '@material-ui/core';
+import { SideMenuTotop } from '../components/SideMenuTotop';
 
 const drawerWidth = 240;
 
@@ -100,6 +101,8 @@ export default function ResponsiveDrawer(props: Props) {
       </div>
       <Divider />
       <List>
+        <SideMenuTotop />
+
         <SideMenuAbout />
 
         <SideMenuWorks />

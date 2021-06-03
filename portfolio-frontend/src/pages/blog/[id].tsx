@@ -41,6 +41,8 @@ import fetch from 'node-fetch';
 import zeroPadding from '../../lib/zeroPadding';
 import deteformat from '../../lib/deteformat';
 
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 import cheerio from 'cheerio';
 
 //markedのoptionを設定
@@ -209,6 +211,10 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                   </Paper>
                   <Highlight innerHTML={true}>{HTMLcontent}</Highlight>
                   <BlogSnsShareBottom />
+                  <Button href={'/blog'} variant="outlined" color="primary" style={{minWidth: '30%',marginBottom: 20,textTransform: 'none'}}>
+                <ArrowBackIcon style={{marginRight: 20, display: 'inline-flex', verticalAlign: 'middle'}}/>
+                Blog一覧べージに戻る
+              </Button>
                 </div>
               </Paper>
               {isXsSm ? (

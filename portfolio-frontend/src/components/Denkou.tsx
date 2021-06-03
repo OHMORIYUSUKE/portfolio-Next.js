@@ -1,10 +1,12 @@
-import { Divider } from '@material-ui/core';
+import { Divider, Link } from '@material-ui/core';
 import { Typography, Container } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import styles from './denkou.module.css';
 import zeroPadding from '../lib/zeroPadding';
+
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 function Denkou() {
   const [posts, setPosts] = useState([]);
@@ -63,7 +65,8 @@ function Denkou() {
 
   return (
     <>
-      <p className={styles.ledText} style={{ maxWidth: '75vw' }}>
+    <div style={{marginTop: 15}}>
+    <p className={styles.ledText} style={{ maxWidth: '76vw',margin: 0 }}>
         <span>
           {`【お知らせ】アイドル達の誕生日をお知らせします。　　　　`}
           {posts.map((data, idx) => (
@@ -95,6 +98,13 @@ function Denkou() {
           {'お誕生日おめでとうございます！！'}
         </span>
       </p>
+      <div style={{textAlign: 'right'}}>
+      <Link href="https://sparql.crssnky.xyz/imas/" underline='always' style={{color: '#ffb400'}} target="_blank"
+            rel="noopener noreferrer">
+        使用しているAPI<ChevronRightIcon style={{ display: 'inline-flex', verticalAlign: 'middle'}} />
+      </Link>
+      </div>
+    </div>
     </>
   );
 }
