@@ -211,10 +211,24 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
                   </Paper>
                   <Highlight innerHTML={true}>{HTMLcontent}</Highlight>
                   <BlogSnsShareBottom />
-                  <Button href={'/blog'} variant="outlined" color="primary" style={{minWidth: '30%',marginBottom: 20,textTransform: 'none'}}>
-                <ArrowBackIcon style={{marginRight: 20, display: 'inline-flex', verticalAlign: 'middle'}}/>
-                Blog一覧べージに戻る
-              </Button>
+                  <Button
+                    href={'/blog'}
+                    variant="outlined"
+                    color="primary"
+                    style={{
+                      minWidth: '30%',
+                      marginBottom: 20,
+                      textTransform: 'none',
+                    }}>
+                    <ArrowBackIcon
+                      style={{
+                        marginRight: 20,
+                        display: 'inline-flex',
+                        verticalAlign: 'middle',
+                      }}
+                    />
+                    Blog一覧べージに戻る
+                  </Button>
                 </div>
               </Paper>
               {isXsSm ? (

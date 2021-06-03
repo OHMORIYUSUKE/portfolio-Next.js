@@ -11,15 +11,30 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 function Denkou() {
   const [posts, setPosts] = useState([]);
   const [tposts, tsetPosts] = useState([]);
+  const [fposts, fsetPosts] = useState([]);
+  const [tfposts, tfsetPosts] = useState([]);
 
   console.log(posts);
 
   console.log(tposts);
 
+  let Parser = require('rss-parser');
+  let parser = new Parser();
+
   // 無限ループを回避する
   useEffect(() => {
     (async () => {
       try {
+        let feed = await parser.parseURL('https://kyoko-np.net/index.xml');
+        fsetPosts(feed.items);
+        tfsetPosts(feed.title);
+
+        console.log(feed.title);
+
+        feed.items.forEach((item) => {
+          console.log(item.title + ' ' + item.description);
+        });
+
         const today = new Date();
 
         const M = zeroPadding(today.getMonth() + 1, 2);
@@ -65,46 +80,66 @@ function Denkou() {
 
   return (
     <>
-    <div style={{marginTop: 15}}>
-    <p className={styles.ledText} style={{ maxWidth: '76vw',margin: 0 }}>
-        <span>
-          {`【お知らせ】アイドル達の誕生日をお知らせします。　　　　`}
-          {posts.map((data, idx) => (
-            <>
-              {idx == 0
-                ? posts.length == idx + 1
-                  ? `今日(${M + '/' + D})生まれ　` +
-                    data.name.value +
-                    ' 🎉　　/　　'
-                  : `今日(${M + '/' + D})生まれ　` + data.name.value + ' , '
-                : posts.length == idx + 1
-                ? data.name.value + ' 🎉　　/　　'
-                : data.name.value + ' , '}
-            </>
-          ))}
-          {tposts.map((data, jdx) => (
-            <>
-              {jdx == 0
-                ? tposts.length == jdx + 1
-                  ? `明日(${tM + '/' + tD})生まれ　` +
-                    data.name.value +
-                    ' 🍰　　　　'
-                  : `明日(${tM + '/' + tD})生まれ　` + data.name.value + ' , '
-                : tposts.length == jdx + 1
-                ? data.name.value + ' 🍰　　　　'
-                : data.name.value + ' , '}
-            </>
-          ))}
-          {'お誕生日おめでとうございます！！'}
-        </span>
-      </p>
-      <div style={{textAlign: 'right'}}>
-      <Link href="https://sparql.crssnky.xyz/imas/" underline='always' style={{color: '#ffb400'}} target="_blank"
+      <div style={{ marginTop: 15 }}>
+        <p className={styles.ledText} style={{ maxWidth: '76vw', margin: 0 }}>
+          <span>
+            {'◇虚構新聞社◇　　　　'}
+            {fposts.slice(0, 3).map((data, idx) => (
+              <>{data.title + '　' + data.description + '　　'}</>
+            ))}
+            {`　　◇アイマス新聞社◇　近日誕生日のアイドルは、　　`}
+            {posts.map((data, idx) => (
+              <>
+                {idx == 0
+                  ? posts.length == idx + 1
+                    ? `今日(${M + '/' + D})生まれ　` +
+                      data.name.value +
+                      ' 🎉　　/　　'
+                    : `今日(${M + '/' + D})生まれ　` + data.name.value + ' , '
+                  : posts.length == idx + 1
+                  ? data.name.value + ' 🎉　　/　　'
+                  : data.name.value + ' , '}
+              </>
+            ))}
+            {tposts.map((data, jdx) => (
+              <>
+                {jdx == 0
+                  ? tposts.length == jdx + 1
+                    ? `明日(${tM + '/' + tD})生まれ　` +
+                      data.name.value +
+                      ' 🍰　　　　'
+                    : `明日(${tM + '/' + tD})生まれ　` + data.name.value + ' , '
+                  : tposts.length == jdx + 1
+                  ? data.name.value + ' 🍰　　　　'
+                  : data.name.value + ' , '}
+              </>
+            ))}
+            {'お誕生日おめでとうございます！！'}
+          </span>
+        </p>
+        <div style={{ textAlign: 'right' }}>
+        <Link
+            href="https://kyoko-np.net/"
+            underline="always"
+            target="_blank"
             rel="noopener noreferrer">
-        使用しているAPI<ChevronRightIcon style={{ display: 'inline-flex', verticalAlign: 'middle'}} />
-      </Link>
+            虚構新聞社
+            <ChevronRightIcon
+              style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+            />
+          </Link>
+          <Link
+            href="https://sparql.crssnky.xyz/imas/"
+            underline="always"
+            target="_blank"
+            rel="noopener noreferrer">
+            アイマス新聞社
+            <ChevronRightIcon
+              style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+            />
+          </Link>
+        </div>
       </div>
-    </div>
     </>
   );
 }

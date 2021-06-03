@@ -5,10 +5,11 @@
   overflow: hidden;
   position: relative;
   padding: 3px 0;
-  color: #ffb400;
-  font-size: 30px;
-  font-weight: bold;
+  color: #a7ffff;
+  font-size: 40px;
+  font-weight: bolder;
   background: #3d3d3d;
+  font-family: serif !important;
 }
 
 /* CSS3グラデーションでドット感を出す */

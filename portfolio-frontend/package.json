@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "prettier . --write && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
@@ -20,6 +20,7 @@
     "react-highlight": "^0.14.0",
     "react-material-ui-carousel": "^2.2.6",
     "react-share": "^4.4.0",
+    "rss-parser": "^3.12.0",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
