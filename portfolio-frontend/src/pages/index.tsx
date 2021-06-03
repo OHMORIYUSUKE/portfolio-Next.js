@@ -39,6 +39,8 @@ import OGPHead from '../components/OGPHead';
 import deteformat from '../lib/deteformat';
 import Denkou from '../components/Denkou';
 
+import Parser from 'rss-parser';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     image: {
@@ -283,7 +285,18 @@ function Blog(props) {
   );
 }
 
-const Home: React.FC = () => {
+interface Feed {
+  title: string;
+  link: string;
+  isoDate: string;
+}
+
+interface Props {
+  qiitaPosts: Array<Feed>;
+  // zennPosts: Array<Feed>;
+}
+
+const Home: React.FC<Props> = (props) => {
   const theme = useTheme();
   const isXsSm = useMediaQuery(theme.breakpoints.down('sm'));
   const carouselWidth = isXsSm ? 12 : 8;
@@ -296,7 +309,7 @@ const Home: React.FC = () => {
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
             <About />
-            <Denkou />
+            <Denkou qiitaPosts={props.qiitaPosts} />
             <Works
               carouselWidth={carouselWidth}
               carouselHeight={carouselHeight}
@@ -315,5 +328,19 @@ const Home: React.FC = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const parser = new Parser();
+
+  const feedQiita = await parser.parseURL('https://kyoko-np.net/index.xml');
+  // const feedZenn = await parser.parseURL('https://kyoko-np.net/index.xml');
+
+  return {
+    props: {
+      qiitaPosts: feedQiita.items,
+      // zennPosts: feedZenn.items,
+    },
+  };
+}
 
 export default Home;
