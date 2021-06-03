@@ -5,7 +5,7 @@
   overflow: hidden;
   position: relative;
   padding: 3px 0;
-  color: #a7ffff;
+  color: #b1ffff;
   font-size: 40px;
   font-weight: bolder;
   background: #3d3d3d;
@@ -37,15 +37,15 @@
   -webkit-animation-name: marquee;
   -webkit-animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
-  -webkit-animation-duration: 20s;
+  -webkit-animation-duration: 40s;
   -moz-animation-name: marquee;
   -moz-animation-timing-function: linear;
   -moz-animation-iteration-count: infinite;
-  -moz-animation-duration: 20s;
+  -moz-animation-duration: 40s;
   animation-name: marquee;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-duration: 20s;
+  animation-duration: 40s;
 }
 
 @-webkit-keyframes marquee {

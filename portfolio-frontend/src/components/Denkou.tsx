@@ -8,33 +8,31 @@ import zeroPadding from '../lib/zeroPadding';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-function Denkou() {
+import Parser from 'rss-parser';
+
+import LinkIcon from '@material-ui/icons/Link';
+
+interface Feed {
+  title: string;
+  link: string;
+  isoDate: string;
+}
+
+interface Props {
+  qiitaPosts: Array<Feed>;
+  // zennPosts: Array<Feed>;
+}
+
+function Denkou({ qiitaPosts }: Props) {
+  console.log(qiitaPosts);
+
   const [posts, setPosts] = useState([]);
   const [tposts, tsetPosts] = useState([]);
-  const [fposts, fsetPosts] = useState([]);
-  const [tfposts, tfsetPosts] = useState([]);
-
-  console.log(posts);
-
-  console.log(tposts);
-
-  let Parser = require('rss-parser');
-  let parser = new Parser();
 
   // 無限ループを回避する
   useEffect(() => {
     (async () => {
       try {
-        let feed = await parser.parseURL('https://kyoko-np.net/index.xml');
-        fsetPosts(feed.items);
-        tfsetPosts(feed.title);
-
-        console.log(feed.title);
-
-        feed.items.forEach((item) => {
-          console.log(item.title + ' ' + item.description);
-        });
-
         const today = new Date();
 
         const M = zeroPadding(today.getMonth() + 1, 2);
@@ -77,17 +75,22 @@ function Denkou() {
   // const D = '24'
   // const tM = '12'
   // const tD = '25'
+  qiitaPosts.map((post, index) => {
+    console.log(post.title);
+  });
 
   return (
     <>
       <div style={{ marginTop: 15 }}>
         <p className={styles.ledText} style={{ maxWidth: '76vw', margin: 0 }}>
           <span>
-            {'◇虚構新聞社◇　　　　'}
-            {fposts.slice(0, 3).map((data, idx) => (
-              <>{data.title + '　' + data.description + '　　'}</>
+            {
+              'This is the OHMORI YUSUKES PORTFOLIO SITE .　　　　　◇虚構ニュース◇　今日のニュース　　'
+            }
+            {qiitaPosts.slice(0, 5).map((user) => (
+              <>{user.title + '　　/　　'}</>
             ))}
-            {`　　◇アイマス新聞社◇　近日誕生日のアイドルは、　　`}
+            {`　　　　　◆アイマスニュース◆　近日誕生日のアイドルは、　　`}
             {posts.map((data, idx) => (
               <>
                 {idx == 0
@@ -117,15 +120,23 @@ function Denkou() {
             {'お誕生日おめでとうございます！！'}
           </span>
         </p>
+        {qiitaPosts.map((post, index) => {
+          <>{post.title}</>;
+        })}
         <div style={{ textAlign: 'right' }}>
-        <Link
+          <Link
             href="https://kyoko-np.net/"
             underline="always"
             target="_blank"
             rel="noopener noreferrer">
-            虚構新聞社
-            <ChevronRightIcon
-              style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+            虚構ニュース
+            <LinkIcon
+              style={{
+                display: 'inline-flex',
+                verticalAlign: 'middle',
+                marginRight: 5,
+                marginLeft: 5,
+              }}
             />
           </Link>
           <Link
@@ -133,9 +144,14 @@ function Denkou() {
             underline="always"
             target="_blank"
             rel="noopener noreferrer">
-            アイマス新聞社
-            <ChevronRightIcon
-              style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+            アイマスニュース
+            <LinkIcon
+              style={{
+                display: 'inline-flex',
+                verticalAlign: 'middle',
+                marginRight: 5,
+                marginLeft: 5,
+              }}
             />
           </Link>
         </div>
