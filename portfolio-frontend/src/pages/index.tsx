@@ -109,6 +109,8 @@ function About() {
 
           <p style={{ textAlign: 'center' }}>天海春香のP</p>
 
+          <p style={{ textAlign: 'center' }}>現在は春香の誕生日を覚えていただきたいので、<br />電光掲示板の表示を変更したいます。</p>
+
           <div style={{ textAlign: 'center' }}>
             <Link
               href={'https://twitter.com/uutan1108'}
@@ -292,7 +294,9 @@ interface Feed {
 }
 
 interface Props {
-  qiitaPosts: Array<Feed>;
+  newsPosts1: Array<Feed>;
+  newsPosts2: Array<Feed>;
+  newsPosts3: Array<Feed>;
   // zennPosts: Array<Feed>;
 }
 
@@ -309,7 +313,11 @@ const Home: React.FC<Props> = (props) => {
         <div style={{ marginBottom: '20px' }}>
           <Grid container alignItems="center" justify="center">
             <About />
-            <Denkou qiitaPosts={props.qiitaPosts} />
+            <Denkou
+              newsPosts1={props.newsPosts1}
+              newsPosts2={props.newsPosts2}
+              newsPosts3={props.newsPosts3}
+            />
             <Works
               carouselWidth={carouselWidth}
               carouselHeight={carouselHeight}
@@ -332,12 +340,23 @@ const Home: React.FC<Props> = (props) => {
 export async function getServerSideProps() {
   const parser = new Parser();
 
-  const feedQiita = await parser.parseURL('https://kyoko-np.net/index.xml');
+  const feedNews1 = await parser.parseURL(
+    'https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=ja&gl=JP&ceid=JP:ja'
+  ); //国際
+  const feedNews2 = await parser.parseURL(
+    'https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFp1ZEdvU0FtVnVHZ0pWVXlnQVAB?hl=ja&gl=JP&ceid=JP:ja'
+  ); //スポーツ
+  const feedNews3 = await parser.parseURL(
+    'https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGRqTVhZU0FtVnVHZ0pWVXlnQVAB?hl=ja&gl=JP&ceid=JP:ja'
+  ); //テクノロジー
+
   // const feedZenn = await parser.parseURL('https://kyoko-np.net/index.xml');
 
   return {
     props: {
-      qiitaPosts: feedQiita.items,
+      newsPosts1: feedNews1.items,
+      newsPosts2: feedNews2.items,
+      newsPosts3: feedNews3.items,
       // zennPosts: feedZenn.items,
     },
   };
