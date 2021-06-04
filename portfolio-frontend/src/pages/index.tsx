@@ -109,7 +109,7 @@ function About() {
 
           <p style={{ textAlign: 'center' }}>天海春香のP</p>
 
-          <p style={{ textAlign: 'center' }}>現在は春香の誕生日を覚えていただきたいので、<br />電光掲示板の表示を変更したいます。</p>
+          <p style={{ textAlign: 'center' }}>現在は春香の誕生日を覚えていただきたいので、<br />電光掲示板の表示を変更しています。</p>
 
           <div style={{ textAlign: 'center' }}>
             <Link
