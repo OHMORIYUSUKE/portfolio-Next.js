@@ -113,7 +113,7 @@ function Denkou({ newsPosts1, newsPosts2, newsPosts3 }: Props) {
                     <>
                       {`今日(${M + '/' + D})生まれ　`}
                       <a style={{ color: '#FFB400' }}>{data.name.value}</a>
-                      {' , '}
+                      {'、'}
                     </>
                   )
                 ) : posts.length == idx + 1 ? (
@@ -124,7 +124,7 @@ function Denkou({ newsPosts1, newsPosts2, newsPosts3 }: Props) {
                 ) : (
                   <>
                     <a style={{ color: '#FFB400' }}>{data.name.value}</a>
-                    {' , '}
+                    {'、'}
                   </>
                 )}
               </>
@@ -142,7 +142,7 @@ function Denkou({ newsPosts1, newsPosts2, newsPosts3 }: Props) {
                     <>
                       {`明日(${tM + '/' + tD})生まれ　`}
                       <a style={{ color: '#FFB400' }}>{data.name.value}</a>
-                      {' , '}
+                      {'、'}
                     </>
                   )
                 ) : tposts.length == jdx + 1 ? (
@@ -153,7 +153,7 @@ function Denkou({ newsPosts1, newsPosts2, newsPosts3 }: Props) {
                 ) : (
                   <>
                     <a style={{ color: '#FFB400' }}>{data.name.value}</a>
-                    {' , '}
+                    {'、'}
                   </>
                 )}
               </>
