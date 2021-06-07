@@ -154,104 +154,102 @@ function blogDetail({ postId, title, updatedAt, content, imageUrl }: Props) {
       </Head>
       <Layout pageName={title} space={0}>
         <div style={{ marginBottom: '20px', marginLeft: bodySpaceLeft }}>
-          <Grid container alignItems="flex-start" justify="flex-start">
-            <Grid item sm={9}>
-              <div style={{ display: 'block' }}>
-                <Typography
-                  component="h4"
-                  variant="h4"
-                  color="textPrimary"
-                  align="center"
-                  style={{ marginTop: '20px' }}>
-                  {title}
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  color="textSecondary"
-                  align="center"
-                  style={{ marginBottom: 7, marginTop: 7 }}>
-                  <EventIcon
-                    style={{ display: 'inline-flex', verticalAlign: 'middle' }}
-                  />
-                  {updatedAt}
-                </Typography>
+          <Grid item sm={9}>
+            <div style={{ display: 'block' }}>
+              <Typography
+                component="h4"
+                variant="h4"
+                color="textPrimary"
+                align="center"
+                style={{ marginTop: '20px' }}>
+                {title}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                align="center"
+                style={{ marginBottom: 7, marginTop: 7 }}>
+                <EventIcon
+                  style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+                />
+                {updatedAt}
+              </Typography>
+            </div>
+            {/* コードのタグをレスポンシブにする */}
+            <Paper elevation={0} square style={{ maxWidth: '100vw' }}>
+              <div style={{ textAlign: 'center' }}>
+                <CardMedia
+                  style={{ height: imageHeight }}
+                  image={imageUrl}
+                  title={title}
+                />
               </div>
-              {/* コードのタグをレスポンシブにする */}
-              <Paper elevation={0} square style={{ maxWidth: '100vw' }}>
-                <div style={{ textAlign: 'center' }}>
-                  <CardMedia
-                    style={{ height: imageHeight }}
-                    image={imageUrl}
-                    title={title}
-                  />
-                </div>
-                <div
-                  style={{
-                    paddingBottom: 3,
-                    paddingLeft: 15,
-                    paddingRight: 15,
-                  }}>
-                  <Paper className={classes.contentsTitles} elevation={0}>
-                    <p
-                      style={{
-                        paddingLeft: 25,
-                        fontSize: 20,
-                        background:
-                          'linear-gradient(transparent 95%, #668ad8 0%)',
-                      }}>
-                      もくじ
-                    </p>
-                    <ol className={classes.list}>
-                      {toc.map((tile, i) => (
-                        <li>
-                          <a href={'#' + tile.id}>{tile.text['data']}</a>
-                        </li>
-                      ))}
-                    </ol>
-                  </Paper>
-                  <Highlight innerHTML={true}>{HTMLcontent}</Highlight>
-                  <BlogSnsShareBottom />
-                  <Button
-                    href={'/blog'}
-                    variant="outlined"
-                    color="primary"
+              <div
+                style={{
+                  paddingBottom: 3,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                }}>
+                <Paper className={classes.contentsTitles} elevation={0}>
+                  <p
                     style={{
-                      minWidth: '30%',
-                      marginBottom: 20,
-                      textTransform: 'none',
+                      paddingLeft: 25,
+                      fontSize: 20,
+                      background:
+                        'linear-gradient(transparent 95%, #668ad8 0%)',
                     }}>
-                    <ArrowBackIcon
-                      style={{
-                        marginRight: 20,
-                        display: 'inline-flex',
-                        verticalAlign: 'middle',
-                      }}
-                    />
-                    Blog一覧べージに戻る
-                  </Button>
-                </div>
-              </Paper>
-              {isXsSm ? (
-                <></>
-              ) : (
-                <div className={classes.indexRoot}>
-                  <Paper elevation={0} className={classes.indexPaper}>
-                    <ol
-                      style={{
-                        listStyleType: 'circle',
-                        paddingInlineStart: 23,
-                      }}>
-                      {toc.map((tile, i) => (
-                        <li key={i}>
-                          <a href={'#' + tile.id}>{tile.text['data']}</a>
-                        </li>
-                      ))}
-                    </ol>
-                  </Paper>
-                </div>
-              )}
-              <BlogSnsShareSide />
-            </Grid>
+                    もくじ
+                  </p>
+                  <ol className={classes.list}>
+                    {toc.map((tile, i) => (
+                      <li>
+                        <a href={'#' + tile.id}>{tile.text['data']}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </Paper>
+                <Highlight innerHTML={true}>{HTMLcontent}</Highlight>
+                <BlogSnsShareBottom />
+                <Button
+                  href={'/blog'}
+                  variant="outlined"
+                  color="primary"
+                  style={{
+                    minWidth: '30%',
+                    marginBottom: 20,
+                    textTransform: 'none',
+                  }}>
+                  <ArrowBackIcon
+                    style={{
+                      marginRight: 20,
+                      display: 'inline-flex',
+                      verticalAlign: 'middle',
+                    }}
+                  />
+                  Blog一覧べージに戻る
+                </Button>
+              </div>
+            </Paper>
+            {isXsSm ? (
+              <></>
+            ) : (
+              <div className={classes.indexRoot}>
+                <Paper elevation={0} className={classes.indexPaper}>
+                  <ol
+                    style={{
+                      listStyleType: 'circle',
+                      paddingInlineStart: 23,
+                    }}>
+                    {toc.map((tile, i) => (
+                      <li key={i}>
+                        <a href={'#' + tile.id}>{tile.text['data']}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </Paper>
+              </div>
+            )}
+            <BlogSnsShareSide />
           </Grid>
         </div>
         <Footer />
