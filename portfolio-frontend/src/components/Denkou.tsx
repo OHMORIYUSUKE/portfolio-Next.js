@@ -35,18 +35,18 @@ function Denkou({ newsPosts1, newsPosts2, newsPosts3 }: Props) {
       try {
         const today = new Date();
 
-        // const M = zeroPadding(today.getMonth() + 1, 2);
-        // const D = zeroPadding(today.getDate(), 2);
+        const M = zeroPadding(today.getMonth() + 1, 2);
+        const D = zeroPadding(today.getDate(), 2);
 
-        // var tomorrow = new Date();
-        // tomorrow.setDate(tomorrow.getDate() + 1);
-        // const tM = zeroPadding(tomorrow.getMonth() + 1, 2);
-        // const tD = zeroPadding(tomorrow.getDate(), 2);
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tM = zeroPadding(tomorrow.getMonth() + 1, 2);
+        const tD = zeroPadding(tomorrow.getDate(), 2);
 
-        const M = '04';
-        const D = '03';
-        const tM = '04';
-        const tD = '04';
+        // const M = '04';
+        // const D = '03';
+        // const tM = '04';
+        // const tD = '04';
         const res = await axios.get(
           `https://sparql.crssnky.xyz/spql/imas/query?output=json&force-accept=text%2Fplain&query=PREFIX%20schema%3A%20%3Chttp%3A%2F%2Fschema.org%2F%3E%0APREFIX%20rdfs%3A%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0ASELECT%20(sample(%3Fo)%20as%20%3Fdate)%20(sample(%3Fn)%20as%20%3Fname)%0AWHERE%20%7B%20%0A%20%20%3Fs%20schema%3AbirthDate%20%3Fo%3B%0A%20%20rdfs%3Alabel%20%3Fn%3B%0A%20%20FILTER(regex(str(%3Fo)%2C%20%22${M}-${D}%22)).%0A%7D%0Agroup%20by(%3Fn)%0Aorder%20by(%3Fname)`
         );
@@ -62,19 +62,19 @@ function Denkou({ newsPosts1, newsPosts2, newsPosts3 }: Props) {
     })();
   }, []);
 
-  // const today = new Date();
-  // const M = zeroPadding(today.getMonth() + 1, 2);
-  // const D = zeroPadding(today.getDate(), 2);
+  const today = new Date();
+  const M = zeroPadding(today.getMonth() + 1, 2);
+  const D = zeroPadding(today.getDate(), 2);
 
-  // var tomorrow = new Date();
-  // tomorrow.setDate(tomorrow.getDate() + 1);
-  // const tM = zeroPadding(tomorrow.getMonth() + 1, 2);
-  // const tD = zeroPadding(tomorrow.getDate(), 2);
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tM = zeroPadding(tomorrow.getMonth() + 1, 2);
+  const tD = zeroPadding(tomorrow.getDate(), 2);
 
-  const M = '04';
-  const D = '03';
-  const tM = '04';
-  const tD = '04';
+  // const M = '04';
+  // const D = '03';
+  // const tM = '04';
+  // const tD = '04';
 
   return (
     <>
