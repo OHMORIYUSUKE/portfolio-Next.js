@@ -24,6 +24,8 @@ import {
   ListItemText,
 } from '@material-ui/core';
 
+import Skeleton from '@material-ui/lab/Skeleton';
+
 import { workData } from '../testData/workData';
 import { blogData } from '../testData/blogData';
 
@@ -162,6 +164,46 @@ function Works(props) {
       }
     })();
   }, []);
+
+  if (posts.length == 0) {
+    return (
+      <>
+        <Grid item xs={props.carouselWidth}>
+          <Link href={'/works'} underline="none" color="textPrimary">
+            <h2
+              style={{
+                textAlign: 'center',
+                background: 'linear-gradient(transparent 90%, #1976D2 0%)',
+              }}>
+              Works
+            </h2>
+          </Link>
+          <Carousel
+            next={() => {
+              /* Do stuff */
+            }}
+            prev={() => {
+              /* Do other stuff */
+            }}
+            animation="slide"
+            interval={3500}
+            timeout={1000}
+            navButtonsAlwaysVisible={false}>
+            {[...Array(5)].map((_, i) => (
+              <Paper elevation={3} style={{ display: 'flex' }} key={i} square>
+                <Skeleton
+                  style={{ height: props.carouselHeight }}
+                  variant="rect"
+                  animation="wave"
+                />
+              </Paper>
+            ))}
+          </Carousel>
+        </Grid>
+      </>
+    );
+  }
+
   return (
     <Grid item xs={props.carouselWidth}>
       <Link href={'/works'} underline="none" color="textPrimary">
@@ -234,9 +276,47 @@ function Blog(props) {
     })();
   }, []);
 
+  if (posts.length == 0) {
+    return (
+      <>
+        <Grid item xs={props.carouselWidth}>
+          <Link href={'/blog'} underline="none" color="textPrimary">
+            <h2
+              style={{
+                textAlign: 'center',
+                background: 'linear-gradient(transparent 90%, #1976D2 0%)',
+              }}>
+              Blog
+            </h2>
+          </Link>
+          <Carousel
+            next={() => {
+              /* Do stuff */
+            }}
+            prev={() => {
+              /* Do other stuff */
+            }}
+            animation="slide"
+            interval={3500}
+            timeout={1000}
+            navButtonsAlwaysVisible={false}>
+            {[...Array(5)].map((_, i) => (
+              <Paper elevation={3} style={{ display: 'flex' }} key={i} square>
+                <Skeleton
+                  style={{ height: props.carouselHeight }}
+                  variant="rect"
+                  animation="wave"
+                />
+              </Paper>
+            ))}
+          </Carousel>
+        </Grid>
+      </>
+    );
+  }
+
   return (
     <>
-      <OGPHead pageName={'TOP'} />
       <Grid item xs={props.carouselWidth}>
         <Link href={'/blog'} underline="none" color="textPrimary">
           <h2
