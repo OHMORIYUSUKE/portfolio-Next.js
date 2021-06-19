@@ -59,7 +59,7 @@ function Web(props) {
     (async () => {
       try {
         const res = await axios.get(
-          `https://y-ohmori-portfolio.microcms.io/api/v1/work?filters=type[contains]${props.query}`,
+          `https://y-ohmori-portfolio.microcms.io/api/v1/work?filters=type[contains]${props.query}&limit=10000`,
           { headers: { 'X-API-KEY': process.env.MKEY } }
         );
         setPosts(res.data.contents);
